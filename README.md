@@ -16,7 +16,7 @@ repositories {
 ```
 ```
 dependencies {
-    implementation 'com.github.SyedHaseebJanBark:extensions_hsb:$latestVersion'
+    implementation 'com.github.syedhaseeb1:extensions_hsb:$latestVersion'
 }
 ```
 
@@ -31,7 +31,7 @@ repositories {
 ```
 ```
 dependencies {
-    implementation("com.github.SyedHaseebJanBark:extensions_hsb:$latestVersion")
+    implementation("com.github.syedhaseeb1:extensions_hsb:$latestVersion")
 }
 ```
 ## Features
@@ -59,4 +59,4 @@ Contributions to this project are welcome! If you have ideas, improvements, or b
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Contact
-For questions, issues, or feedback, please visit the [GitHub Repository](https://github.com/SyedHaseebJanBark/extensions_hsb) and open an issue. We'd love to hear from you!
+For questions, issues, or feedback, please visit the [GitHub Repository](https://github.com/syedhaseeb1/extensions_hsb) and open an issue. We'd love to hear from you!
