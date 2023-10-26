@@ -1,0 +1,86 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
+}
+def lib_version = "1.0.9"
+android {
+    namespace 'com.hsb.extensions_hsb'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "$lib_version"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.6.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+
+    //Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    //PermissionX
+    implementation("com.guolindev.permissionx:permissionx:1.7.1")
+
+    //OkHttp
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+}
+afterEvaluate {
+    android.libraryVariants.each { variant ->
+        publishing.publications.create(variant.name, MavenPublication) {
+            from(components.findByName(variant.name))
+            // artifact(androidJavadocsJar)
+            //artifact(androidSourceJar)
+            groupId = "com.hsb.extensions_hsb"
+            artifactId = "extensions_hsb"
+            version = "$lib_version"
+        }
+    }
+}
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'com.hsb.extensions_hsb'
+            artifactId = 'extensions_hsb'
+            version = "$lib_version" // Align with your versionName
+
+            // Optional: Customize other publication settings like pom
+            pom {
+                name = 'My Extensions Library'
+                description = 'A library for Utils'
+            }
+        }
+    }
+    repositories {
+        mavenLocal() // Use a remote repository
+    }
+}
