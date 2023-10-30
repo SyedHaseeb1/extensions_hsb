@@ -75,7 +75,6 @@ object Extensions {
 
     fun Int.formatTo01() = String.format("%02d", this)
 
-
     fun Context.verticalRv() = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
     fun Context.gridV(span: Int) = GridLayoutManager(this, span)
@@ -90,9 +89,16 @@ object Extensions {
 
 
     fun Long.convertMillisToDateFormat(): String {
-        val dateFormat = SimpleDateFormat("MMM D, yyyy 'at' hh:mm a", Locale.US)
-        val date = Date(this * 1000)
-        return dateFormat.format(date)
+        val currentTimeMillis = System.currentTimeMillis()
+        val dateFormat = SimpleDateFormat("MMM d, yyyy 'at' hh:mm a", Locale.US)
+
+        if (this > currentTimeMillis) {
+            val currentDate = Date(currentTimeMillis)
+            return dateFormat.format(currentDate)
+        } else {
+            val date = Date(this)
+            return dateFormat.format(date)
+        }
     }
 
     fun formatToDay(): String {

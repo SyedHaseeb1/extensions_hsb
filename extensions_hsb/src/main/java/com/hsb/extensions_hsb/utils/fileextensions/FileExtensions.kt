@@ -15,6 +15,7 @@ import android.os.Environment
 import android.os.Looper
 import android.provider.MediaStore
 import android.text.format.Formatter
+import com.hsb.extensions_hsb.utils.Extensions.formatTo01
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -116,7 +117,9 @@ object FileExtensions {
         val hours = duration / 3600
         val minutes = (duration - hours * 3600) / 60
         val seconds = duration - (hours * 3600 + minutes * 60)
-        return "$hours:$minutes:$seconds"
+        return "${hours.toInt().formatTo01()}:${minutes.toInt().formatTo01()}:${
+            seconds.toInt().formatTo01()
+        }"
     }
 
     fun File.is_MP4_Or_MP3(): String {
