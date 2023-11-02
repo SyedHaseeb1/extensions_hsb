@@ -19,6 +19,9 @@ class Loadialog(activity: Activity) : Dialog(activity) {
         setCancelable(false)
     }
 
+    fun setLoadingText(text: String) {
+        binding.tvTitle.text = text
+    }
 
     fun showDialog(text: String = "Loading...") {
         if (!isShowing) {
