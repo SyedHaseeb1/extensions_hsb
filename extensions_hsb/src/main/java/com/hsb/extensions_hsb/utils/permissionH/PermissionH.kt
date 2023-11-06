@@ -50,11 +50,6 @@ class PermissionH {
                 if (allGranted) {
                     click?.invoke(true)
                 } else {
-                    Toast.makeText(
-                        activity,
-                        "These permissions are denied:\n$deniedList",
-                        Toast.LENGTH_SHORT
-                    ).show()
                 }
             }
     }
