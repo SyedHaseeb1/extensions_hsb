@@ -52,6 +52,36 @@ This library leverages the power of the following dependencies:
 ## Custom Classes
 In addition to the mentioned dependencies, the HSB Extensions Library includes custom-made classes to simplify common tasks and enhance reusability in your Android development projects. Feel free to explore the source code and documentation to learn more about these custom classes.
 
+
+## Functions:
+
+1. `formatFileSize`: Formats the file size to a human-readable format.
+2. `deleteDir`: Deletes a directory and its contents.
+3. `getFolderSize`: Retrieves the size of a folder.
+4. `getAppFolderSize`: Gets the size of the application's folder.
+5. `getMediaDuration`: Retrieves the duration of media files.
+6. `is_MP4_Or_MP3`: Checks if a file is an MP4 or MP3 file.
+7. `getMediaThumbnail`: Retrieves the thumbnail of media files.
+8. `getFileSizeOnline`: Retrieves the size of a file hosted online.
+9. `getMediaFrame`: Retrieves the frame of media files.
+10. `getFilePathFromContentUri`: Retrieves the file path from a content URI.
+11. `getThumbFromAudio`: Retrieves a thumbnail image from an audio file.
+12. `fileToBytes`: Converts a file into a byte array.
+13. `shareMultipleFiles`: Shares multiple files via an intent.
+
+## Usage Examples:
+
+### `formatFileSize()`
+
+This function formats the file size to display in a human-readable format. Example usage:
+
+```kotlin
+val file = File("/path/to/your/file")
+val formattedSize = file.formatFileSize()
+println("Formatted File Size: $formattedSize")
+
+
+
 ## Contributing
 Contributions to this project are welcome! If you have ideas, improvements, or bug fixes to suggest, please create a new issue or submit a pull request to this repository.
 
