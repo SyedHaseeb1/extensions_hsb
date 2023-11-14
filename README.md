@@ -53,7 +53,7 @@ This library leverages the power of the following dependencies:
 In addition to the mentioned dependencies, the HSB Extensions Library includes custom-made classes to simplify common tasks and enhance reusability in your Android development projects. Feel free to explore the source code and documentation to learn more about these custom classes.
 
 
-## Functions:
+## File Extensions:
 
 1. `formatFileSize`: Formats the file size to a human-readable format.
 2. `deleteDir`: Deletes a directory and its contents.
@@ -80,6 +80,21 @@ val file = File("/path/to/your/file")
 val formattedSize = file.formatFileSize()
 println("Formatted File Size: $formattedSize")
 ```
+### Global Extensions
+
+| Function Name | Function Name | Function Name |
+| ------------- | ------------- | ------------- |
+| `intentData` | `toast(msg: String)` | `routWithData(data: String, cls: Class<*>)` |
+| `rout(cls: Class<*>)` | `isInitialized(): Boolean` | `routFlow(cls: Class<*>)` |
+| `saveFolder(): File?` | `formatTo01(): String` | `verticalRv()` |
+| `gridV(span: Int)` | `lastIndex(): Int` | `convertMillisToDateFormat(): String` |
+| `formatToDay(): String` | `copyToClipboard(text: String)` | `bitArray(link: String): ByteArray` |
+| `convertToMinutesSeconds(): String` | `calculateNetworkSpeed(downloadedBytes: Long, elapsedTime: Long): String` | `log(msg: String): String` |
+| `shareLink(link: String)` | `getAvailableRAM(): Long` | `downloadThisFile(url: String, destinationPath: String?, fileName: String): File?` |
+| `short(s: String): String` | `isWifiAvailable(): Boolean` | `replaceCharacters(): String` |
+| `getStringByName(resourceName: String): String?` | `isInternetAvailable(): Boolean` | `getCurrentTime(): String` |
+| `byteArray(): ByteArray` | `resizeBy(size: Int): Bitmap` | `shortenUrl(longUrl: String, callback: (String?) -> Unit)` |
+| `openLinkInChrome(url: String)` | `sendFeedbackEmailTo(email: String)` | `capitalizeFirstLetter(): String` |
 
 ## Contributing
 Contributions to this project are welcome! If you have ideas, improvements, or bug fixes to suggest, please create a new issue or submit a pull request to this repository.
