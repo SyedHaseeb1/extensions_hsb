@@ -9,7 +9,11 @@ import androidx.fragment.app.FragmentActivity
 import com.permissionx.guolindev.PermissionX
 
 object PermissionH {
-    fun checkRunTimePermissions(permission: List<String>, activity: Activity,callback: (Boolean) -> Unit) {
+    fun checkRunTimePermissions(
+        permission: List<String>,
+        activity: Activity,
+        callback: (Boolean) -> Unit
+    ) {
         permission.forEach { perm ->
             val result = ContextCompat.checkSelfPermission(activity, perm)
             if (result == PackageManager.PERMISSION_GRANTED) {

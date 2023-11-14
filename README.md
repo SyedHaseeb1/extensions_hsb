@@ -52,22 +52,73 @@ This library leverages the power of the following dependencies:
 ## Custom Classes
 In addition to the mentioned dependencies, the HSB Extensions Library includes custom-made classes to simplify common tasks and enhance reusability in your Android development projects. Feel free to explore the source code and documentation to learn more about these custom classes.
 
+# PermissionH
+
+The `PermissionH` object provides utility functions for managing runtime permissions in Android applications.
+
+## Usage
+
+### `checkRunTimePermissions`
+Checks if the provided permissions are granted or not.
+
+#### Parameters:
+- `permission`: List of permissions to check.
+- `activity`: The current activity.
+- `callback`: Callback invoked with a boolean value indicating if all permissions are granted.
+
+#### Example:
+```kotlin
+val permissionsToCheck = listOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+PermissionH.requestPermissions(permissionsToCheck, this) { allPermissionsGranted ->
+    if (allPermissionsGranted) {
+        // All permissions granted, proceed with necessary operations
+    } else {
+        // Permissions not granted, handle accordingly
+    }
+}
+```
+
+## **Loadialog:** *Loadialog Your Loading*
+The `Loadialog` class is a custom dialog component crafted for overseeing loading indicators within your Android application.
+
+## Usage
+
+- **Initialization**: Construct the `Loadialog` within your Activity:
+  ```
+  val loadDialog = Loadialog(this)
+  ```
+- **Usage**: Show loading within your Activity:
+  ```
+  loadDialog.showDialog("Your text here...")
+  ```
+  #### Show Progress bar:
+  ```
+  loadDialog.setProgress(progressMax, currentProgress))
+  ```
+    #### Dismiss Dialog:
+  ```
+  loadDialog.dismissDialog()
+  ```
 
 ## File Extensions:
 
-1. `formatFileSize`: Formats the file size to a human-readable format.
-2. `deleteDir`: Deletes a directory and its contents.
-3. `getFolderSize`: Retrieves the size of a folder.
-4. `getAppFolderSize`: Gets the size of the application's folder.
-5. `getMediaDuration`: Retrieves the duration of media files.
-6. `is_MP4_Or_MP3`: Checks if a file is an MP4 or MP3 file.
-7. `getMediaThumbnail`: Retrieves the thumbnail of media files.
-8. `getFileSizeOnline`: Retrieves the size of a file hosted online.
-9. `getMediaFrame`: Retrieves the frame of media files.
-10. `getFilePathFromContentUri`: Retrieves the file path from a content URI.
-11. `getThumbFromAudio`: Retrieves a thumbnail image from an audio file.
-12. `fileToBytes`: Converts a file into a byte array.
-13. `shareMultipleFiles`: Shares multiple files via an intent.
+| Function Name            | Description                                     |
+| -------------------------| ----------------------------------------------- |
+| `formatFileSize`         | Formats file size for easy human readability.    |
+| `deleteDir`              | Deletes a directory and its contents.            |
+| `getFolderSize`          | Retrieves the size of a specific folder.         |
+| `getAppFolderSize`       | Gets the size of the application's folder.      |
+| `getMediaDuration`       | Retrieves duration information from media files. |
+| `is_MP4_Or_MP3`          | Checks if a file is in MP4 or MP3 format.       |
+| `getMediaThumbnail`      | Fetches thumbnails from media files.            |
+| `getFileSizeOnline`      | Retrieves the size of a file hosted online.     |
+| `getMediaFrame`          | Retrieves frames from media files.              |
+| `getFilePathFromContentUri` | Fetches file path from a content URI.       |
+| `getThumbFromAudio`      | Retrieves a thumbnail image from an audio file. |
+| `fileToBytes`            | Converts a file into a byte array.              |
+| `shareMultipleFiles`     | Shares multiple files using an intent.          |
+
 
 ## Usage Examples:
 
@@ -79,22 +130,68 @@ This function formats the file size to display in a human-readable format. Examp
 val file = File("/path/to/your/file")
 val formattedSize = file.formatFileSize()
 println("Formatted File Size: $formattedSize")
+"Formatted File Size: 349 KB"
 ```
 ### Global Extensions
 
-| Function Name | Function Name | Function Name |
-| ------------- | ------------- | ------------- |
-| `intentData` | `toast(msg: String)` | `routWithData(data: String, cls: Class<*>)` |
-| `rout(cls: Class<*>)` | `isInitialized(): Boolean` | `routFlow(cls: Class<*>)` |
-| `saveFolder(): File?` | `formatTo01(): String` | `verticalRv()` |
-| `gridV(span: Int)` | `lastIndex(): Int` | `convertMillisToDateFormat(): String` |
-| `formatToDay(): String` | `copyToClipboard(text: String)` | `bitArray(link: String): ByteArray` |
-| `convertToMinutesSeconds(): String` | `calculateNetworkSpeed(downloadedBytes: Long, elapsedTime: Long): String` | `log(msg: String): String` |
-| `shareLink(link: String)` | `getAvailableRAM(): Long` | `downloadThisFile(url: String, destinationPath: String?, fileName: String): File?` |
-| `short(s: String): String` | `isWifiAvailable(): Boolean` | `replaceCharacters(): String` |
-| `getStringByName(resourceName: String): String?` | `isInternetAvailable(): Boolean` | `getCurrentTime(): String` |
-| `byteArray(): ByteArray` | `resizeBy(size: Int): Bitmap` | `shortenUrl(longUrl: String, callback: (String?) -> Unit)` |
-| `openLinkInChrome(url: String)` | `sendFeedbackEmailTo(email: String)` | `capitalizeFirstLetter(): String` |
+
+| Function Name                    | Description                                       |
+| ---------------------------------| ------------------------------------------------- |
+| `intentData`                     | Holds data for intents.                            |
+| `toast(message)`                 | Displays a brief message.                          |
+| `routWithData(data, destination)` | Navigates to a destination with specified data.   |
+| `rout(destination)`             | Opens a new screen or destination.                 |
+| `isInitialized(): Boolean`      | Checks if an object is initialized.                |
+| `routFlow(destination)`         | Navigates to a destination with priority.          |
+| `saveFolder(): File?`           | Retrieves the path for storing files.              |
+| `formatTo01(): String`          | Converts a number to a two-digit format.           |
+| `verticalRv()`                  | Prepares a vertical scrolling list.                |
+| `gridV(span: Int)`              | Sets up a grid-style layout.                       |
+| `lastIndex(): Int`              | Retrieves the last index of an array or list.      |
+| `convertMillisToDateFormat(): String` | Formats milliseconds to a readable date.      |
+| `formatToDay(): String`         | Converts the current date to the day of the week.  |
+| `copyToClipboard(text)`         | Copies text to the clipboard.                      |
+| `bitArray(link): ByteArray`     | Fetches an image from a link as a ByteArray.       |
+| `convertToMinutesSeconds(): String` | Converts milliseconds to minutes and seconds. |
+| `calculateNetworkSpeed(bytes, time): String` | Calculates network speed.                 |
+| `log(message): String`          | Logs a message.                                   |
+| `shareLink(link)`               | Shares a link via available apps.                  |
+| `getAvailableRAM(): Long`       | Retrieves available RAM.                          |
+| `downloadThisFile(url, path, fileName): File?` | Downloads a file to a specified location. |
+| `shortenText(text): String`     | Shortens a text to a specific length.              |
+| `isWifiAvailable(): Boolean`    | Checks if Wi-Fi is available.                      |
+| `removeSpecialChars(text): String` | Removes special characters from a string.      |
+| `getStringByName(name): String?` | Retrieves a string by its resource name.         |
+| `isInternetAvailable(): Boolean`| Checks internet availability.                      |
+| `getCurrentTime(): String`      | Retrieves the current time.                        |
+| `imageToByteArray(): ByteArray` | Converts an image to a ByteArray.                  |
+| `resizeImageByScale(scale): Bitmap` | Resizes an image by a specific scale.         |
+| `shortenUrl(url, callback)`:    | Shortens a URL and provides a callback.           |
+| `openLinkInChrome(url)`         | Opens a URL in the Chrome browser if available.    |
+| `sendFeedbackEmailTo(email)`    | Composes an email for feedback.                    |
+| `capitalizeFirstLetter(): String`| Capitalizes the first letter of a string.   
+
+### View Extensions
+
+| Function Name                           | Description                                                     |
+| ---------------------------------------| --------------------------------------------------------------- |
+| `tint(color: Int)`                      | Sets a tint color to the ImageView.                              |
+| `loadImage(src: Any)`                   | Loads an image into the ImageView using Glide.                    |
+| `loadImageFromAssets(fileName: String)` | Loads an image from assets into the ImageView.                   |
+| `loadImage(src: Any, errorIco: Int)`    | Loads an image with an error icon into the ImageView.            |
+| `loadImage(src: Any, cache: Boolean)`   | Loads an image into the ImageView with or without caching.       |
+| `setTint(color: Int)`                   | Sets a background tint color to the View.                        |
+| `setOnSwipeListener(onSwipe: ...)`      | Sets a swipe listener to detect swipe directions on the View.    |
+| `safeClickListener(debounceTime: Long)` | Sets a click listener with a debounce time to avoid rapid clicks.|
+| `animIn(left: Boolean, right: Boolean)` | Animates the View to appear from left or right with scaling.     |
+| `animOut(left: Boolean, right: Boolean)`| Animates the View to disappear to left or right with scaling.    |
+| `showKeyboard()`                        | Displays the soft keyboard for the View.                         |
+| `hideKeyboard()`                        | Hides the soft keyboard for the View.                            |
+| `setOnSearchClickListener(callback)`    | Sets a listener for search action on EditText.                   |
+| `setOnTextChangeListener(callback)`    | Sets a text change listener on EditText.                         |
+| `autoFillFromClipBoard()`               | Automatically fills an EditText from clipboard if a URL exists.   |
+| `focusListener()`                       | Sets a focus listener to toggle keyboard visibility on the View. |
+       
 
 ## Contributing
 Contributions to this project are welcome! If you have ideas, improvements, or bug fixes to suggest, please create a new issue or submit a pull request to this repository.
