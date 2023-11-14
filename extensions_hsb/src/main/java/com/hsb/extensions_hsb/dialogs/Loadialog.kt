@@ -8,6 +8,11 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import com.hsb.extensions_hsb.databinding.LoadialogViewBinding
 
+/**
+ * Nov 14, 2023
+ * Developed by Syed Haseeb
+ * Github: https://github.com/syedhaseeb1
+ */
 class Loadialog(activity: Activity) : Dialog(activity) {
     private var binding = LoadialogViewBinding.inflate(layoutInflater)
     val progressBar = binding.pbr

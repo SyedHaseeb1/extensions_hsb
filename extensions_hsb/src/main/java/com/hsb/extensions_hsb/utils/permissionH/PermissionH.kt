@@ -8,6 +8,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.permissionx.guolindev.PermissionX
 
+/**
+ * Nov 14, 2023
+ * Developed by Syed Haseeb
+ * Github: https://github.com/syedhaseeb1
+ */
 object PermissionH {
     fun checkRunTimePermissions(
         permission: List<String>,

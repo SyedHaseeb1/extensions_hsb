@@ -22,9 +22,14 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.hsb.extensions_hsb.utils.Extensions.toast
+import com.hsb.extensions_hsb.utils.globalextensions.Extensions.toast
 import java.io.IOException
 
+/**
+ * Nov 14, 2023
+ * Developed by Syed Haseeb
+ * Github: https://github.com/syedhaseeb1
+ */
 object ViewExtensions {
     fun ImageView.tint(color: Int) {
         this.setColorFilter(ContextCompat.getColor(this.context, color))

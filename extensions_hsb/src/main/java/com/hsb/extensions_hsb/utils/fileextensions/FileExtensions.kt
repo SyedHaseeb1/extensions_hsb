@@ -13,10 +13,9 @@ import android.media.ThumbnailUtils
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
-import android.os.Looper
 import android.provider.MediaStore
 import android.text.format.Formatter
-import com.hsb.extensions_hsb.utils.Extensions.formatTo01
+import com.hsb.extensions_hsb.utils.globalextensions.Extensions.formatTo01
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -29,6 +28,11 @@ import java.io.FileNotFoundException
 import java.io.IOException
 import java.text.DecimalFormat
 
+/**
+ * Nov 14, 2023
+ * Developed by Syed Haseeb
+ * Github: https://github.com/syedhaseeb1
+ */
 object FileExtensions {
     fun File.formatFileSize(): String {
         val kiloByte = 1024

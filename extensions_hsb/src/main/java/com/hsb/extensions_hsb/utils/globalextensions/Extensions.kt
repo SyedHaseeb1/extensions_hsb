@@ -1,7 +1,6 @@
-package com.hsb.extensions_hsb.utils
+package com.hsb.extensions_hsb.utils.globalextensions
 
 import android.Manifest
-import android.app.Activity
 import android.app.ActivityManager
 import android.app.DownloadManager
 import android.content.ActivityNotFoundException
@@ -9,7 +8,6 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -17,20 +15,14 @@ import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
-import android.text.format.Formatter.formatFileSize
 import android.util.Log
-import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresPermission
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.hsb.extensions_hsb.R
 import com.hsb.extensions_hsb.utils.fileextensions.FileExtensions
-import com.hsb.extensions_hsb.utils.viewextensions.ViewExtensions.showKeyboard
-import com.permissionx.guolindev.PermissionX
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -43,6 +35,11 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+/**
+ * Nov 14, 2023
+ * Developed by Syed Haseeb
+ * Github: https://github.com/syedhaseeb1
+ */
 object Extensions {
     val intentData = "intentData"
     fun Context.toast(msg: String) {
