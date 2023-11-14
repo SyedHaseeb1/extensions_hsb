@@ -2,6 +2,7 @@ package com.hsb.extensions_hsb.utils.fileextensions
 
 import android.content.ContentResolver
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.database.Cursor
@@ -21,7 +22,10 @@ import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
+import java.io.BufferedInputStream
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileNotFoundException
 import java.io.IOException
 import java.text.DecimalFormat
 
@@ -248,6 +252,34 @@ object FileExtensions {
         } else {
             null
         }
+    }
+
+    fun File.fileToBytes(): ByteArray {
+        val size = length().toInt()
+        val bytes = ByteArray(size)
+        try {
+            val buf = BufferedInputStream(FileInputStream(this))
+            buf.read(bytes, 0, bytes.size)
+            buf.close()
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return bytes
+    }
+
+    fun Context.shareMultipleFiles(files: List<Uri>) {
+        if (files.isEmpty()) {
+            // No files to share
+            return
+        }
+        val intent = Intent(Intent.ACTION_SEND_MULTIPLE)
+        intent.type = "audio/*"
+
+        intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, ArrayList(files))
+
+        startActivity(Intent.createChooser(intent, "Share files"))
     }
 
 }

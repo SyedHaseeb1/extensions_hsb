@@ -6,6 +6,7 @@ import android.app.Activity
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.os.SystemClock
 import android.text.Editable
 import android.text.TextWatcher
@@ -22,6 +23,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.hsb.extensions_hsb.utils.Extensions.toast
+import java.io.IOException
 
 object ViewExtensions {
     fun ImageView.tint(color: Int) {
@@ -35,6 +37,17 @@ object ViewExtensions {
             .skipMemoryCache(true)
             .into(this)
 
+    }
+
+    fun ImageView.loadImageFromAssets(fileName: String) {
+        val assetManager = context.assets
+        try {
+            val inputStream = assetManager.open(fileName)
+            val drawable = Drawable.createFromStream(inputStream, null)
+            this.setImageDrawable(drawable)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
     }
 
     fun ImageView.loadImage(src: Any, errorIco: Int) {
@@ -234,6 +247,19 @@ object ViewExtensions {
 
         } else {
             //context.toast("Clipboard is empty")
+        }
+    }
+
+    fun View.focusListener() {
+        this.viewTreeObserver.addOnPreDrawListener {
+            val currentVisibility = this.visibility
+            if (currentVisibility == View.VISIBLE) {
+                showKeyboard()
+            } else {
+                hideKeyboard()
+            }
+            this.isEnabled = currentVisibility == View.VISIBLE
+            true
         }
     }
 
