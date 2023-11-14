@@ -79,8 +79,7 @@ This function formats the file size to display in a human-readable format. Examp
 val file = File("/path/to/your/file")
 val formattedSize = file.formatFileSize()
 println("Formatted File Size: $formattedSize")
-
-
+```
 
 ## Contributing
 Contributions to this project are welcome! If you have ideas, improvements, or bug fixes to suggest, please create a new issue or submit a pull request to this repository.
