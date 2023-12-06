@@ -59,6 +59,7 @@ object PermissionH {
                 if (allGranted) {
                     click?.invoke(true)
                 } else {
+                    click?.invoke(false)
                 }
             }
     }
