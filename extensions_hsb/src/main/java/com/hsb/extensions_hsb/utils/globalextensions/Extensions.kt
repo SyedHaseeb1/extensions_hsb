@@ -1,6 +1,7 @@
 package com.hsb.extensions_hsb.utils.globalextensions
 
 import android.Manifest
+import android.app.Activity
 import android.app.ActivityManager
 import android.app.DownloadManager
 import android.content.ActivityNotFoundException
@@ -18,6 +19,7 @@ import android.os.Environment
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresPermission
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -39,6 +41,8 @@ import java.util.Locale
  * Nov 14, 2023
  * Developed by Syed Haseeb
  * Github: https://github.com/syedhaseeb1
+ *
+ * Updated on Jan 08, 2024
  */
 object Extensions {
     val intentData = "intentData"
@@ -167,6 +171,19 @@ object Extensions {
         intent.type = "text/plain"
         intent.putExtra(Intent.EXTRA_TEXT, link);
         startActivity(intent)
+    }
+
+    fun Context.shareText(text: String) {
+        if (text.isEmpty()) {
+            toast("No text to share!")
+            return
+        }
+        val sendIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, text)
+            type = "text/plain"
+        }
+        startActivity(Intent.createChooser(sendIntent, null))
     }
 
     fun Context.getAvailableRAM(): Long {
@@ -308,4 +325,13 @@ object Extensions {
         return this.substring(0, 1).toUpperCase() + this.substring(1)
     }
 
+    fun convertSecToTime(timeInMilliSec: Long): String {
+        val duration = timeInMilliSec / 1000
+        val hours = duration / 3600
+        val minutes = (duration - hours * 3600) / 60
+        val seconds = duration - (hours * 3600 + minutes * 60)
+        return "${hours.toInt().formatTo01()}:${minutes.toInt().formatTo01()}:${
+            seconds.toInt().formatTo01()
+        }"
+    }
 }

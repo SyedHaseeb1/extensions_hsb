@@ -7,6 +7,10 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.SystemClock
 import android.text.Editable
 import android.text.TextWatcher
@@ -24,11 +28,14 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.hsb.extensions_hsb.utils.globalextensions.Extensions.toast
 import java.io.IOException
+import kotlin.math.atan2
 
 /**
  * Nov 14, 2023
  * Developed by Syed Haseeb
  * Github: https://github.com/syedhaseeb1
+ *
+ * Updated on Jan 08, 2024
  */
 object ViewExtensions {
     fun ImageView.tint(color: Int) {
@@ -268,4 +275,109 @@ object ViewExtensions {
         }
     }
 
+    //Buttons
+    fun View.considerAsBackButton(activity: Activity) {
+        this.setOnClickListener {
+            activity.finish()
+        }
+    }
+
+    //Effects
+    fun View.applyGravityEffect(sensitivity: Int = 2) {
+        val sensorManager: SensorManager =
+            context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        sensorManager.registerListener(object : SensorEventListener {
+            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+                //Not needed
+            }
+
+            override fun onSensorChanged(event: SensorEvent?) {
+                if (event?.sensor?.type == Sensor.TYPE_GRAVITY) {
+                    val x = event.values[0] * sensitivity
+                    val y = event.values[1] * sensitivity
+                    this@applyGravityEffect.rotation = x
+                }
+            }
+        }, sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY), Sensor.TYPE_ACCELEROMETER)
+    }
+
+    // Extension function to apply gravity fall effect
+    fun View.applyGravityFallEffect(sensitivity: Int = 2) {
+        val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        val accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        val gravitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY)
+
+        var gravityX = 0f
+        var gravityY = 0f
+
+        val accelerometerListener = object : SensorEventListener {
+            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+            }
+
+            override fun onSensorChanged(event: SensorEvent?) {
+                if (event?.sensor == accelerometerSensor) {
+                    val alpha = 0.8f
+                    gravityX = alpha * gravityX + (1 - alpha) * event!!.values[0]
+                    gravityY = alpha * gravityY + (1 - alpha) * event.values[1]
+                } else if (event?.sensor == gravitySensor) {
+                    gravityX = event!!.values[0]
+                    gravityY = event.values[1]
+                }
+
+                val angle = atan2(gravityX, gravityY) * (180 / Math.PI)
+                val maxRotation = 30f // Adjust this value to control max rotation angle
+
+                val rotation =
+                    if (angle > maxRotation) maxRotation else if (angle < -maxRotation) -maxRotation else angle.toFloat()
+
+                this@applyGravityFallEffect.rotation = (rotation * (-1)) * sensitivity
+            }
+        }
+
+        sensorManager.registerListener(
+            accelerometerListener,
+            accelerometerSensor,
+            SensorManager.SENSOR_DELAY_NORMAL
+        )
+        sensorManager.registerListener(
+            accelerometerListener,
+            gravitySensor,
+            SensorManager.SENSOR_DELAY_NORMAL
+        )
+    }
+
+    fun View.apply3DEffect(sensitivity: Int = 2) {
+        val sensorManager: SensorManager =
+            context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        sensorManager.registerListener(object : SensorEventListener {
+            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+                //Not needed
+            }
+
+            override fun onSensorChanged(event: SensorEvent?) {
+                if (event?.sensor?.type == Sensor.TYPE_GRAVITY) {
+                    val x = event.values[0] * sensitivity
+                    val y = event.values[1] * sensitivity
+                    val rX = x / 2 * (-1)
+                    val rY = y * (2)
+                    this@apply3DEffect.rotationY = rX
+                    this@apply3DEffect.rotationX = rY
+                }
+            }
+        }, sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY), Sensor.TYPE_ACCELEROMETER)
+    }
+
+    fun Activity.setSystemUIColor(
+        statusBar: Boolean = true,
+        navigation: Boolean = true,
+        color: Int
+    ) {
+        val myColor = ContextCompat.getColor(this, color)
+        if (statusBar) {
+            window?.statusBarColor = myColor
+        }
+        if (navigation) {
+            window?.navigationBarColor = myColor
+        }
+    }
 }

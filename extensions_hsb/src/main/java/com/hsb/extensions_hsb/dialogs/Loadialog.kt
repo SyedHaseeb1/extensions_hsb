@@ -12,6 +12,8 @@ import com.hsb.extensions_hsb.databinding.LoadialogViewBinding
  * Nov 14, 2023
  * Developed by Syed Haseeb
  * Github: https://github.com/syedhaseeb1
+ *
+ * Updated on Jan 08, 2024
  */
 class Loadialog(activity: Activity) : Dialog(activity) {
     private var binding = LoadialogViewBinding.inflate(layoutInflater)

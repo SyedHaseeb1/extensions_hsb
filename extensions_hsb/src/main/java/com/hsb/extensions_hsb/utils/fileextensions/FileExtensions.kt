@@ -32,6 +32,8 @@ import java.text.DecimalFormat
  * Nov 14, 2023
  * Developed by Syed Haseeb
  * Github: https://github.com/syedhaseeb1
+ *
+ * Updated on Jan 08, 2024
  */
 object FileExtensions {
     fun File.formatFileSize(): String {
@@ -279,7 +281,7 @@ object FileExtensions {
             return
         }
         val intent = Intent(Intent.ACTION_SEND_MULTIPLE)
-        intent.type = "audio/*"
+        intent.type = "*/*"
 
         intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, ArrayList(files))
 
