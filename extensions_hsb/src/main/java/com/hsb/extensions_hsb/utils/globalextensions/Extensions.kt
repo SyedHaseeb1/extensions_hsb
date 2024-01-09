@@ -42,7 +42,7 @@ import java.util.Locale
  * Developed by Syed Haseeb
  * Github: https://github.com/syedhaseeb1
  *
- * Updated on Jan 08, 2024
+ * Updated on Jan 09, 2024
  */
 object Extensions {
     val intentData = "intentData"
@@ -110,10 +110,6 @@ object Extensions {
     fun Context.copyToClipboard(text: String) {
         if (text.trim().isEmpty()) {
             toast("No text to copy!")
-            return
-        }
-        if (!text.startsWith("http")) {
-            toast("No URL to copy!")
             return
         }
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
