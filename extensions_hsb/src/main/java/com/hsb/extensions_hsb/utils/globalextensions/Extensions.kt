@@ -1,6 +1,7 @@
 package com.hsb.extensions_hsb.utils.globalextensions
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityManager
 import android.app.DownloadManager
@@ -16,6 +17,7 @@ import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresPermission
@@ -33,6 +35,8 @@ import okhttp3.Response
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -329,5 +333,24 @@ object Extensions {
         return "${hours.toInt().formatTo01()}:${minutes.toInt().formatTo01()}:${
             seconds.toInt().formatTo01()
         }"
+    }
+
+    @SuppressLint("HardwareIds")
+    fun Context.getDeviceHashID(): String {
+        val androidId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+        return try {
+            // Create MD5 Hash
+            val digest = MessageDigest.getInstance("MD5")
+            digest.update(androidId.toByteArray())
+            val messageDigest = digest.digest()
+
+            // Create Hex String
+            val hexString = StringBuffer()
+            for (i in messageDigest.indices) hexString.append(Integer.toHexString(0xFF and messageDigest[i].toInt()))
+            hexString.toString().uppercase(Locale.getDefault()).trim()
+        } catch (e: NoSuchAlgorithmException) {
+            e.printStackTrace()
+            ""
+        }
     }
 }

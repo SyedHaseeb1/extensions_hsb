@@ -138,6 +138,7 @@ println("Formatted File Size: $formattedSize")
 | Function Name                    | Description                                       |
 | ---------------------------------| ------------------------------------------------- |
 | `intentData`                     | Holds data for intents.                            |
+| `getDeviceHashID()`              | Returns device ID as String.                       |
 | `toast(message)`                 | Displays a brief message.                          |
 | `routWithData(data, destination)` | Navigates to a destination with specified data.   |
 | `rout(destination)`             | Opens a new screen or destination.                 |
