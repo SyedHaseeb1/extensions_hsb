@@ -1,6 +1,7 @@
 package com.hsb.extensions_hsb.utils.globalextensions
 
 import android.Manifest
+import android.animation.Animator
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityManager
@@ -10,23 +11,40 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.os.FileUtils
 import android.provider.Settings
 import android.util.Log
+import android.view.View
+import android.view.ViewAnimationUtils
+import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.RequiresPermission
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.Model
 import com.hsb.extensions_hsb.R
 import com.hsb.extensions_hsb.utils.fileextensions.FileExtensions
+import com.hsb.extensions_hsb.utils.globalextensions.Extensions.log
+import com.hsb.extensions_hsb.utils.globalextensions.Extensions.rout
+import com.hsb.extensions_hsb.utils.viewextensions.ViewExtensions.beGone
+import com.hsb.extensions_hsb.utils.viewextensions.ViewExtensions.loadImage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -35,11 +53,13 @@ import okhttp3.Response
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
+import java.io.Serializable
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlin.math.hypot
 
 /**
  * Nov 14, 2023
@@ -64,6 +84,16 @@ object Extensions {
     fun Context.rout(cls: Class<*>) {
         startActivity(Intent(this, cls))
     }
+
+    fun Context.safeRouteTo(cls: Class<*>, exception: ((error: String) -> Unit)? = null) {
+        try {
+            startActivity(Intent(this, cls))
+        } catch (e: ActivityNotFoundException) {
+            exception?.invoke(e.message.toString())
+        }
+
+    }
+
 
     fun <T> T?.isInitialized(): Boolean {
         return this != null
@@ -351,6 +381,190 @@ object Extensions {
         } catch (e: NoSuchAlgorithmException) {
             e.printStackTrace()
             ""
+        }
+    }
+
+    fun Activity.fullScreenUi() {
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
+    }
+
+    fun Context.openLinkInBrowser(url: String) {
+        try {
+            // Create the Intent to open the URL
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+
+            // Check if the device is running Android 6.0 Marshmallow (API level 23) or higher
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                // Use the Chrome Custom Tab to open the URL (preferred method on newer devices)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.`package` = "com.android.chrome"
+            }
+
+            // Create a chooser for the Intent to allow the user to select a web browser
+            val chooserIntent = Intent.createChooser(intent, "Open link with:")
+
+            // Start the activity to open the URL in the browser
+            chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(chooserIntent)
+        } catch (e: ActivityNotFoundException) {
+            // If no web browser is installed on the device, catch the exception and handle it
+            // You can display a message to the user to install a web browser to open the link
+        }
+    }
+
+    fun Context.sendSafeEmail(
+        email: String,
+        subj: String = "",
+        msg: String,
+        exception: ((error: String) -> Unit)? = null,
+    ) {
+        val selectorIntent = Intent(Intent.ACTION_SENDTO)
+        selectorIntent.data = Uri.parse("mailto:$email")
+        val emailIntent = Intent(Intent.ACTION_SEND)
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Email: $subj")
+        emailIntent.putExtra(Intent.EXTRA_TEXT, msg)
+        emailIntent.selector = selectorIntent
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send email..."))
+        } catch (e: ActivityNotFoundException) {
+            exception?.invoke(e.localizedMessage.toString())
+        }
+    }
+
+    fun View.applyCircularRevealEffect(
+        reveal: Boolean = true,
+        rootView: ViewGroup,
+        color: Int? = null,
+        drawable: Drawable? = null,
+        animSpeed: Int = 1000,
+        onAnimEnd: (() -> Unit),
+    ) {
+        val splashView = ImageView(this.context)
+        val params = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.MATCH_PARENT
+        )
+        splashView.layoutParams = params
+        drawable?.let {
+            splashView.loadImage(it, false)
+        }
+        color?.let {
+            splashView.loadImage(it, false)
+        }
+        splashView.scaleType = ImageView.ScaleType.FIT_XY
+        rootView.removeView(splashView)
+        rootView.addView(splashView)
+        if (reveal) {
+            // Coordinates for the center of the button
+            val x: Int = (this.left + this.right) / 2
+            val y: Int = this.bottom / 1
+            // End radius to cover the entire screen
+            val endRadius = hypot(
+                rootView.width.toDouble(),
+                rootView.height.toDouble()
+            ).toInt()
+
+            // Starting radius is 0 since the reveal starts from the button
+            val startRadius = 0
+
+            // Create circular reveal animation
+            val anim = ViewAnimationUtils.createCircularReveal(
+                splashView, // Reveal the entire root layout
+                x,
+                y,
+                startRadius.toFloat(),
+                endRadius.toFloat()
+            )
+
+            // Make the invisible layout visible for the reveal animation
+            rootView.visibility = View.VISIBLE
+            anim.addListener(object : Animator.AnimatorListener {
+                override fun onAnimationStart(animation: Animator) {
+                }
+
+                override fun onAnimationEnd(animation: Animator) {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        onAnimEnd.invoke()
+                    }
+
+                }
+
+                override fun onAnimationCancel(animation: Animator) {
+                }
+
+                override fun onAnimationRepeat(animation: Animator) {
+                }
+            })
+            // Start the reveal animation
+            anim.duration = animSpeed.toLong()
+            anim.start()
+        } else {
+            // Coordinates for the center of the button
+            val x: Int = (this.left + this.right) / 2
+            val y: Int = this.bottom / 1
+
+            // Starting radius is the full width of the root layout
+            val startRadius: Int = hypot(
+                rootView.width.toDouble(),
+                rootView.height.toDouble()
+            ).toInt()
+
+            // End radius is 0 to close the reveal layout
+            val endRadius = 0
+
+            // Create circular reveal animation
+            val anim = ViewAnimationUtils.createCircularReveal(
+                splashView, // Reveal the entire root layout
+                x,
+                y,
+                startRadius.toFloat(),
+                endRadius.toFloat()
+            )
+
+            // Listen for animation end to hide the root layout
+            anim.addListener(object : Animator.AnimatorListener {
+                override fun onAnimationStart(animation: Animator) {
+                }
+
+                override fun onAnimationEnd(animation: Animator) {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        onAnimEnd.invoke()
+                        splashView.beGone()
+                    }
+                }
+
+                override fun onAnimationCancel(animation: Animator) {
+                }
+
+                override fun onAnimationRepeat(animation: Animator) {
+                }
+            })
+            // Start the reveal animation
+            anim.duration = animSpeed.toLong()
+            anim.start()
+        }
+    }
+
+    fun Context.safeOpenExternalApp(
+        packageName: String,
+        exception: ((error: String) -> Unit)? = null,
+    ) {
+        val pm: PackageManager = packageManager
+        val launchIntent: Intent? = pm.getLaunchIntentForPackage(packageName)
+        try {
+            if (launchIntent != null) {
+                startActivity(launchIntent)
+            } else {
+                throw ActivityNotFoundException("Launch intent not found for package: $packageName")
+            }
+        } catch (e: ActivityNotFoundException) {
+            exception?.invoke(e.message.toString())
+        } finally {
+            println("Attempt to launch package $packageName ")
         }
     }
 }

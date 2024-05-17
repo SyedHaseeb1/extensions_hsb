@@ -1,6 +1,8 @@
 package com.hsb.extensions_hsb.utils.viewextensions
 
 import android.animation.AnimatorSet
+import android.animation.LayoutTransition
+import android.animation.LayoutTransition.TransitionListener
 import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.ClipboardManager
@@ -11,22 +13,34 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.os.Handler
+import android.os.Looper
 import android.os.SystemClock
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.core.animation.addListener
 import androidx.core.content.ContextCompat
+import androidx.core.view.children
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.hsb.extensions_hsb.utils.globalextensions.Extensions.toast
+import com.hsb.extensions_hsb.utils.viewextensions.ViewExtensions.beInvisible
+import com.hsb.extensions_hsb.utils.viewextensions.ViewExtensions.beVisible
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.IOException
 import kotlin.math.atan2
 
@@ -35,7 +49,7 @@ import kotlin.math.atan2
  * Developed by Syed Haseeb
  * Github: https://github.com/syedhaseeb1
  *
- * Updated on Jan 08, 2024
+ * Updated on May 17, 2024
  */
 object ViewExtensions {
     fun ImageView.tint(color: Int) {
@@ -104,7 +118,7 @@ object ViewExtensions {
                         e1: MotionEvent?,
                         e2: MotionEvent,
                         velocityX: Float,
-                        velocityY: Float
+                        velocityY: Float,
                     ): Boolean {
                         val diffX = e2.x - e1!!.x
                         val diffY = e2.y - e1.y
@@ -145,18 +159,18 @@ object ViewExtensions {
 
     fun View.safeClickListener(
         debounceTime: Long = 800L,
-        action: () -> Unit
+        action: (view: View) -> Unit,
     ) {
-
         this.setOnClickListener(object : View.OnClickListener {
             private var lastClickTime: Long = 0
             override fun onClick(v: View) {
                 if (SystemClock.elapsedRealtime() - lastClickTime < debounceTime) return
-                else action()
+                else action.invoke(this@safeClickListener)
                 lastClickTime = SystemClock.elapsedRealtime()
             }
         })
     }
+
 
     fun View.animIn(left: Boolean = false, right: Boolean = false) {
         val translationX = ObjectAnimator.ofFloat(
@@ -370,7 +384,7 @@ object ViewExtensions {
     fun Activity.setSystemUIColor(
         statusBar: Boolean = true,
         navigation: Boolean = true,
-        color: Int
+        color: Int,
     ) {
         val myColor = ContextCompat.getColor(this, color)
         if (statusBar) {
@@ -378,6 +392,80 @@ object ViewExtensions {
         }
         if (navigation) {
             window?.navigationBarColor = myColor
+        }
+    }
+
+
+    fun withDelay(timeInMillis: Long = 500, callback: () -> Unit) {
+        Handler(Looper.getMainLooper()).postDelayed({ callback.invoke() }, timeInMillis)
+    }
+
+    fun View.beGone() {
+        this.apply {
+            clearAnimation()
+            visibility = View.GONE
+        }
+    }
+
+    fun View.beVisible() {
+        this.visibility = View.VISIBLE
+    }
+
+    fun View.beInvisible() {
+        this.apply {
+            clearAnimation()
+            visibility = View.INVISIBLE
+        }
+    }
+}
+
+fun ViewGroup.animateOnViewChanges(
+    animDelay: Int = 50,
+    hideViews: Boolean = false,
+    transitionListener: TransitionListener? = null,
+) {
+    if (hideViews) {
+        this.children.forEach { v1 ->
+            v1.beInvisible()
+            if (v1 is ViewGroup) {
+                v1.children.forEach { v2 ->
+                    v2.beInvisible()
+                }
+            }
+        }
+    }
+    val layoutTransition = LayoutTransition()
+    layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+    transitionListener?.let {
+        layoutTransition.addTransitionListener(it)
+    }
+    this.layoutTransition = layoutTransition
+    this.children.forEach { v1 ->
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(animDelay.toLong())
+            if (hideViews) {
+                v1.beVisible()
+            }
+            if (v1 is ViewGroup) {
+                if (v1 !is RecyclerView) {
+                    v1.layoutTransition = layoutTransition
+                    v1.children.forEach { v2 ->
+                        if (hideViews) {
+                            v2.beVisible()
+                        }
+                        if (v2 is ViewGroup) {
+                            if (v2 !is RecyclerView) {
+                                v2.layoutTransition = layoutTransition
+                                v2.children.forEach { v3 ->
+                                    if (hideViews) {
+                                        v3.beVisible()
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
