@@ -48,7 +48,9 @@ object Animations {
         transitionListener?.let {
             layoutTransition.addTransitionListener(it)
         }
-        this.layoutTransition = layoutTransition
+        if (this !is FragmentContainerView) {
+            this.layoutTransition = layoutTransition
+        }
         this.children.forEach { v1 ->
             CoroutineScope(Dispatchers.Main).launch {
                 delay(animDelay.toLong())
@@ -56,14 +58,14 @@ object Animations {
                     v1.beVisible()
                 }
                 if (v1 is ViewGroup) {
-                    if (v1 !is RecyclerView || v1 !is FragmentContainerView) {
+                    if (v1 !is RecyclerView && v1 !is FragmentContainerView) {
                         v1.layoutTransition = layoutTransition
                         v1.children.forEach { v2 ->
                             if (hideViews) {
                                 v2.beVisible()
                             }
                             if (v2 is ViewGroup) {
-                                if (v2 !is RecyclerView || v2 !is FragmentContainerView) {
+                                if (v2 !is RecyclerView && v2 !is FragmentContainerView) {
                                     v2.layoutTransition = layoutTransition
                                     v2.children.forEach { v3 ->
                                         if (hideViews) {
@@ -78,6 +80,7 @@ object Animations {
             }
         }
     }
+
     fun View.apply3DEffectHorizontal(sensitivity: Float = 2f) {
         val sensorManager: SensorManager =
             context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -180,6 +183,7 @@ object Animations {
             }
         }, sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY), Sensor.TYPE_ACCELEROMETER)
     }
+
     fun View.animIn(left: Boolean = false, right: Boolean = false) {
         val translationX = ObjectAnimator.ofFloat(
             this,
