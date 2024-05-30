@@ -27,7 +27,7 @@ import kotlin.math.atan2
  * syedhaseeb1.github.io
  */
 
-class Animations {
+object Animations {
     fun ViewGroup.animateOnViewChanges(
         animDelay: Int = 50,
         hideViews: Boolean = false,
