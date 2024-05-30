@@ -19,7 +19,7 @@ object PermissionH {
     fun checkRunTimePermissions(
         permission: List<String>,
         activity: Activity,
-        callback: (Boolean) -> Unit
+        callback: (Boolean) -> Unit,
     ) {
         permission.forEach { perm ->
             val result = ContextCompat.checkSelfPermission(activity, perm)
@@ -37,24 +37,27 @@ object PermissionH {
     fun requestPermissions(
         permissions: List<String>,
         activity: FragmentActivity,
-        click: ((Boolean) -> Unit)? = null
+        deniedMsg: String = "Core fundamental are based on these permissions",
+        forwardToSettingsMsg: String = "You need to allow necessary permissions in Settings manually",
+        positiveBtnText: String = "OK",
+        negativeBtnText: String = "Cancel",
+        click: ((isGranted: Boolean) -> Unit)? = null,
     ) {
         PermissionX.init(activity)
             .permissions(permissions)
             .onExplainRequestReason { scope, deniedList ->
                 scope.showRequestReasonDialog(
-                    deniedList,
-                    "Core fundamental are based on these permissions",
-                    "OK",
-                    "Cancel"
+                    deniedList, deniedMsg,
+                    positiveBtnText,
+                    negativeBtnText
                 )
             }
             .onForwardToSettings { scope, deniedList ->
                 scope.showForwardToSettingsDialog(
                     deniedList,
-                    "You need to allow necessary permissions in Settings manually",
-                    "OK",
-                    "Cancel"
+                    forwardToSettingsMsg,
+                    positiveBtnText,
+                    negativeBtnText
                 )
             }
             .request { allGranted, grantedList, deniedList ->

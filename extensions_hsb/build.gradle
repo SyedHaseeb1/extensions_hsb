@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'maven-publish'
 }
-def lib_version = "1.1.5"
+def lib_version = "1.1.6"
 android {
     namespace 'com.hsb.extensions_hsb'
     compileSdk 34

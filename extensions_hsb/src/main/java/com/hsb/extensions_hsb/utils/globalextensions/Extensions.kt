@@ -14,6 +14,11 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
+import android.media.MediaPlayer
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.NetworkInfo
@@ -24,12 +29,15 @@ import android.os.FileUtils
 import android.provider.Settings
 import android.util.Log
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
+import android.widget.VideoView
+import androidx.annotation.RawRes
 import androidx.annotation.RequiresPermission
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -42,6 +50,7 @@ import com.hsb.extensions_hsb.utils.globalextensions.Extensions.log
 import com.hsb.extensions_hsb.utils.globalextensions.Extensions.rout
 import com.hsb.extensions_hsb.utils.viewextensions.ViewExtensions.beGone
 import com.hsb.extensions_hsb.utils.viewextensions.ViewExtensions.loadImage
+import com.hsb.extensions_hsb.utils.viewextensions.ViewExtensions.safeClickListeners
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -567,4 +576,15 @@ object Extensions {
             println("Attempt to launch package $packageName ")
         }
     }
+
+
+
+
+
+    fun Context.getRawResourcePath(@RawRes rawResId: Int): Uri {
+        return Uri.parse("android.resource://${packageName}/$rawResId")
+    }
+
+
+
 }
