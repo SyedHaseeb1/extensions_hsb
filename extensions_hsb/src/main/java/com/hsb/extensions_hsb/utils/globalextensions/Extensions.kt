@@ -5,6 +5,7 @@ import android.animation.Animator
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityManager
+import android.app.Dialog
 import android.app.DownloadManager
 import android.content.ActivityNotFoundException
 import android.content.ClipData
@@ -13,6 +14,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -26,8 +30,11 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.os.FileUtils
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.provider.Settings
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewAnimationUtils
@@ -38,16 +45,20 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import android.widget.VideoView
 import androidx.annotation.RawRes
+import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.Model
 import com.hsb.extensions_hsb.R
+import com.hsb.extensions_hsb.utils.annotaions.ExperimentalCrashTestApi
 import com.hsb.extensions_hsb.utils.fileextensions.FileExtensions
 import com.hsb.extensions_hsb.utils.globalextensions.Extensions.log
 import com.hsb.extensions_hsb.utils.globalextensions.Extensions.rout
+import com.hsb.extensions_hsb.utils.stringExtensions.StringExtensions.short
 import com.hsb.extensions_hsb.utils.viewextensions.ViewExtensions.beGone
 import com.hsb.extensions_hsb.utils.viewextensions.ViewExtensions.loadImage
 import com.hsb.extensions_hsb.utils.viewextensions.ViewExtensions.safeClickListeners
@@ -249,11 +260,6 @@ object Extensions {
         return File(destinationPath, fileName)
     }
 
-    fun String.short() = if (this.length > 30) {
-        this.substring(0, 30).trim()
-    } else {
-        this.trim()
-    }
 
 
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
@@ -273,10 +279,7 @@ object Extensions {
         }
     }
 
-    fun String.replaceCharacters(): String {
-        val regex = "[^a-zA-Z0-9 ]".toRegex()
-        return replace(regex, "")
-    }
+
 
     fun Context.getStringByName(resourceName: String): String? {
         val resourceId = resources.getIdentifier(resourceName, "string", packageName)
@@ -346,9 +349,20 @@ object Extensions {
         }
     }
 
-    fun Context.sendFeedbackEmailTo(email: String) {
+    fun Context.sendFeedbackEmailTo(email: String, feedBackText: String) {
         val appName = getString(R.string.app_name)
-        val msg = "Help us improve $appName. Let us know how we can enhance your experience."
+        val deviceModel = Build.MODEL
+        val deviceManufacturer = Build.MANUFACTURER
+        val deviceBrand = Build.BRAND
+        val deviceName = "$deviceManufacturer $deviceBrand $deviceModel"
+        val currentTime = System.currentTimeMillis().convertMillisToDateFormat()
+        val msg = if (feedBackText.isEmpty()) {
+            "$currentTime\nDevice: $deviceName\n\nTell us which issues you are facing using $appName?\n"
+        } else {
+            "$currentTime\nDevice: $deviceName\n\n$feedBackText"
+        }
+
+
         val selectorIntent = Intent(Intent.ACTION_SENDTO)
         selectorIntent.data = Uri.parse("mailto:$email")
         val emailIntent = Intent(Intent.ACTION_SEND)
@@ -357,11 +371,6 @@ object Extensions {
         emailIntent.putExtra(Intent.EXTRA_TEXT, msg)
         emailIntent.selector = selectorIntent
         startActivity(Intent.createChooser(emailIntent, "Send email..."))
-    }
-
-    fun String.capitalizeFirstLetter(): String {
-        if (isEmpty()) return this
-        return this.substring(0, 1).toUpperCase() + this.substring(1)
     }
 
     fun convertSecToTime(timeInMilliSec: Long): String {
@@ -578,13 +587,119 @@ object Extensions {
     }
 
 
-
-
-
     fun Context.getRawResourcePath(@RawRes rawResId: Int): Uri {
         return Uri.parse("android.resource://${packageName}/$rawResId")
     }
 
+    fun Context.openPlayStoreWithAccount(accountName: String) {
+        val playStoreIntent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse("https://play.google.com/store/apps/developer?id=$accountName")
+        )
+        if (playStoreIntent.resolveActivity(packageManager) != null) {
+            startActivity(playStoreIntent)
+        } else {
+            toast("Play Store app not installed")
+            val browserIntent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://play.google.com/store/apps/developer?id=$accountName")
+            )
 
+            if (browserIntent.resolveActivity(packageManager) != null) {
+                startActivity(browserIntent)
+            } else {
+                toast("No browser app found")
+            }
+        }
+    }
+
+    fun Context.openPlayStoreWithAPID(packageName: String) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName"))
+            intent.setPackage("com.android.vending")
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            // If the Play Store app is not available, open the Play Store website
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
+            )
+            startActivity(intent)
+        }
+    }
+
+    @ExperimentalCrashTestApi
+    fun Context.fillRam() {
+        CoroutineScope(Dispatchers.Main).launch {
+
+            val linearLayout = LinearLayout(this@fillRam)
+            linearLayout.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            linearLayout.orientation = LinearLayout.VERTICAL
+
+            val size = 2500
+            val tile = 10
+            val bmp =
+                Bitmap.createBitmap(
+                    size,
+                    size,
+                    Bitmap.Config.ARGB_4444
+                ) // this creates a MUTABLE bitmap
+            log("Before:${getAvailableRAM()}")
+            val canvas = Canvas(bmp)
+            val paint = Paint()
+            paint.color = Color.RED
+            for (x in 0 until size step tile) {
+                for (y in 0 until size step tile) {
+                    // Draw smaller rectangles (tiles) to create the larger bitmap
+                    canvas.drawRect(
+                        x.toFloat(),
+                        y.toFloat(),
+                        (x + tile).toFloat(),
+                        (y + tile).toFloat(),
+                        paint
+                    )
+                }
+            }
+            repeat(50) {
+                val imageView = ImageView(this@fillRam)
+                imageView.setImageBitmap(bmp)
+                linearLayout.addView(imageView)
+            }
+        }
+
+    }
+
+    @RequiresPermission(Manifest.permission.VIBRATE)
+    fun Context.vibratePhone() {
+        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        if (Build.VERSION.SDK_INT >= 26) {
+            vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
+        } else {
+            vibrator.vibrate(200)
+        }
+    }
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun Activity.checkThisPermission(permission: String): Boolean {
+        return checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
+    }
+
+
+
+    inline fun <reified T : ViewBinding> Context.showDialog(
+        crossinline bindingInflater: (LayoutInflater) -> T,
+        themeResId: Int = 0,
+        crossinline initView: (T, Dialog) -> Unit = { _, _ ->
+        },
+    ): Dialog {
+        val dialog = Dialog(this, themeResId)
+        val binding = bindingInflater(LayoutInflater.from(this))
+        dialog.setContentView(binding.root)
+        initView(binding, dialog)
+        dialog.show()
+        return dialog
+    }
 
 }

@@ -29,9 +29,11 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.VideoView
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
+import androidx.annotation.MenuRes
 import androidx.core.animation.addListener
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
@@ -316,6 +318,17 @@ object ViewExtensions {
         setOnPreparedListener { mediaPlayer ->
             playCallback.invoke(mediaPlayer)
         }
+    }
+
+
+    fun View.showPopUpMenu(@MenuRes menuId: Int, callBack: (clickedID: Int) -> Unit) {
+        val popupMenu = PopupMenu(this.context, this)
+        popupMenu.menuInflater.inflate(menuId, popupMenu.menu);
+        popupMenu.setOnMenuItemClickListener {
+            callBack.invoke(it.itemId)
+            true
+        }
+        popupMenu.show()
     }
 }
 
