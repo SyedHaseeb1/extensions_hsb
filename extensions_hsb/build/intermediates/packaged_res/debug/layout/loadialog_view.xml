@@ -36,6 +36,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="Loading..."
+                android:textAlignment="center"
+                android:gravity="center"
                 android:paddingHorizontal="5dp"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"

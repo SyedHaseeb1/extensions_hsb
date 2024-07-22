@@ -30,6 +30,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.os.FileUtils
+import android.os.Handler
+import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.provider.Settings
@@ -261,7 +263,6 @@ object Extensions {
     }
 
 
-
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     fun Context.isWifiAvailable(): Boolean {
         val connectivityManager =
@@ -278,7 +279,6 @@ object Extensions {
             return nwInfo.isConnected
         }
     }
-
 
 
     fun Context.getStringByName(resourceName: String): String? {
@@ -681,11 +681,11 @@ object Extensions {
             vibrator.vibrate(200)
         }
     }
+
     @RequiresApi(Build.VERSION_CODES.M)
     fun Activity.checkThisPermission(permission: String): Boolean {
         return checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
     }
-
 
 
     inline fun <reified T : ViewBinding> Context.showDialog(
@@ -700,6 +700,52 @@ object Extensions {
         initView(binding, dialog)
         dialog.show()
         return dialog
+    }
+
+    fun withDelay(delay: Long = 500, callBack: (() -> Unit)) {
+        Handler(Looper.getMainLooper()).postDelayed({
+            callBack.invoke()
+        }, delay)
+    }
+
+    // Function to get resource ID from resource name
+    fun Context.getResourceId(resName: String, resType: String): Int {
+        return resources.getIdentifier(resName, resType, packageName)
+    }
+
+    fun Context.readJsonFromAssets(fileName: String): String {
+        val inputStream = assets.open(fileName)
+        val size = inputStream.available()
+        val buffer = ByteArray(size)
+        inputStream.read(buffer)
+        inputStream.close()
+        return String(buffer)
+    }
+
+    fun Activity.routWithData(
+        data: String,
+        cls: Class<*>,
+        reqCode: Int? = null,
+    ) {
+        val intent = Intent(this, cls)
+        intent.putExtra(intentData, data)
+        if (reqCode != null) {
+            startActivityForResult(intent, reqCode)
+        } else {
+            startActivity(intent)
+        }
+    }
+
+    fun Activity.rout(
+        cls: Class<*>,
+        reqCode: Int? = null,
+    ) {
+        val intent = Intent(this, cls)
+        if (reqCode != null) {
+            startActivityForResult(intent, reqCode)
+        } else {
+            startActivity(intent)
+        }
     }
 
 }
