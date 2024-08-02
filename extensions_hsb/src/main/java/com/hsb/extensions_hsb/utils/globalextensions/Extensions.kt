@@ -18,6 +18,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.Drawable
+import android.graphics.pdf.PdfDocument
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -74,6 +75,7 @@ import okhttp3.Request
 import okhttp3.Response
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 import java.io.Serializable
 import java.security.MessageDigest
@@ -673,12 +675,17 @@ object Extensions {
     }
 
     @RequiresPermission(Manifest.permission.VIBRATE)
-    fun Context.vibratePhone() {
+    fun Context.vibratePhone(timeInMilliSec: Long = 50) {
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         if (Build.VERSION.SDK_INT >= 26) {
-            vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
+            vibrator.vibrate(
+                VibrationEffect.createOneShot(
+                    timeInMilliSec,
+                    VibrationEffect.DEFAULT_AMPLITUDE
+                )
+            )
         } else {
-            vibrator.vibrate(200)
+            vibrator.vibrate(timeInMilliSec)
         }
     }
 
@@ -748,4 +755,33 @@ object Extensions {
         }
     }
 
+    fun isAndroid13OrAbove() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+
+    fun Any.logIt(tag: String = "ExtensionsHsb") {
+        Log.e(tag, this.toString())
+    }
+
+    fun View.convertToPdf(fileName: String = "temp_${System.currentTimeMillis()}"): String {
+        // Create a PDF document
+        val document = PdfDocument()
+        val pageInfo = PdfDocument.PageInfo.Builder(width, height, 1).create()
+        val page = document.startPage(pageInfo)
+        draw(page.canvas)
+        document.finishPage(page)
+
+        // Save the document
+        val filePath = context.getExternalFilesDir(null)?.absolutePath + "/$fileName.pdf"
+        val file = File(filePath)
+        FileOutputStream(file).use { out ->
+            document.writeTo(out)
+        }
+        val targetFile = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
+            "$fileName.pdf"
+        )
+        file.copyTo(targetFile, true)
+        document.close()
+
+        return filePath
+    }
 }
