@@ -56,6 +56,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.Model
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.hsb.extensions_hsb.R
 import com.hsb.extensions_hsb.utils.annotaions.ExperimentalCrashTestApi
 import com.hsb.extensions_hsb.utils.fileextensions.FileExtensions
@@ -757,8 +758,9 @@ object Extensions {
 
     fun isAndroid13OrAbove() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
 
-    fun Any.logIt(tag: String = "ExtensionsHsb") {
+    fun Any.logIt(tag: String = "ExtensionsHsb"):String {
         Log.e(tag, this.toString())
+        return this.toString()
     }
 
     fun View.convertToPdf(fileName: String = "temp_${System.currentTimeMillis()}"): String {
@@ -768,7 +770,6 @@ object Extensions {
         val page = document.startPage(pageInfo)
         draw(page.canvas)
         document.finishPage(page)
-
         // Save the document
         val filePath = context.getExternalFilesDir(null)?.absolutePath + "/$fileName.pdf"
         val file = File(filePath)
@@ -783,5 +784,18 @@ object Extensions {
         document.close()
 
         return filePath
+    }
+
+    inline fun <reified T : ViewBinding> Context.showBottomSheetDialog(
+        crossinline bindingInflater: (LayoutInflater) -> T,
+        themeResId: Int = R.style.TransparentBottomSheetDialog,
+        crossinline initView: (T, BottomSheetDialog) -> Unit = { _, _ -> }
+    ): BottomSheetDialog {
+        val dialog = BottomSheetDialog(this, themeResId)
+        val binding = bindingInflater(LayoutInflater.from(this))
+        dialog.setContentView(binding.root)
+        initView(binding, dialog)
+        dialog.show()
+        return dialog
     }
 }

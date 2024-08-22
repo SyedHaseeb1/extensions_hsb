@@ -8,13 +8,17 @@ import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.pdf.PdfDocument
+import android.graphics.pdf.PdfRenderer
 import android.media.MediaMetadataRetriever
 import android.media.ThumbnailUtils
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.os.ParcelFileDescriptor
 import android.provider.MediaStore
 import android.text.format.Formatter
+import android.view.View
 import com.hsb.extensions_hsb.utils.globalextensions.Extensions.formatTo01
 import okhttp3.Call
 import okhttp3.Callback
@@ -25,6 +29,7 @@ import java.io.BufferedInputStream
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileNotFoundException
+import java.io.FileOutputStream
 import java.io.IOException
 import java.text.DecimalFormat
 
@@ -286,6 +291,64 @@ object FileExtensions {
         intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, ArrayList(files))
 
         startActivity(Intent.createChooser(intent, "Share files"))
+    }
+
+    fun Uri.fusshhNow(): Boolean {
+        val file = File(path.toString())
+        return file.deleteDir()
+    }
+
+    fun Context.fusshhNow(contentUri: Uri): Boolean {
+        val resolver = contentResolver
+
+        return try {
+            val rowsDeleted = resolver.delete(contentUri, null, null)
+            rowsDeleted > 0
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
+    fun Context.generatePdfThumbnail(pdfFileUri: Uri): Bitmap? {
+        try {
+            val pdfFile = FileUtils.getFile(this, pdfFileUri)
+            val fileDescriptor: ParcelFileDescriptor =
+                ParcelFileDescriptor.open(pdfFile, ParcelFileDescriptor.MODE_READ_ONLY)
+            val pdfRenderer = PdfRenderer(fileDescriptor)
+            val page = pdfRenderer.openPage(0)
+            val bitmap =
+                Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888)
+            page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
+            page.close()
+            pdfRenderer.close()
+            return bitmap
+        } catch (e: Exception) {
+            return null
+        }
+    }
+
+    fun View.convertToPdf(fileName: String = "temp_${System.currentTimeMillis()}"): String {
+        // Create a PDF document
+        val document = PdfDocument()
+        val pageInfo = PdfDocument.PageInfo.Builder(width, height, 1).create()
+        val page = document.startPage(pageInfo)
+        draw(page.canvas)
+        document.finishPage(page)
+
+        // Save the document
+        val filePath = context.getExternalFilesDir(null)?.absolutePath + "/$fileName.pdf"
+        val file = File(filePath)
+        FileOutputStream(file).use { out ->
+            document.writeTo(out)
+        }
+        val targetFile = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
+            "$fileName.pdf"
+        )
+        file.copyTo(targetFile, true)
+        document.close()
+
+        return filePath
     }
 
 }
