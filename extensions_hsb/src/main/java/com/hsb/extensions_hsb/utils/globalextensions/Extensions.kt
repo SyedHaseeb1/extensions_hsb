@@ -7,6 +7,9 @@ import android.app.Activity
 import android.app.ActivityManager
 import android.app.Dialog
 import android.app.DownloadManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import androidx.activity.enableEdgeToEdge
 import android.content.ActivityNotFoundException
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -16,6 +19,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.graphics.pdf.PdfDocument
@@ -36,12 +40,15 @@ import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.provider.Settings
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewAnimationUtils
 import android.view.ViewGroup
+import android.view.WindowInsets
+import android.view.WindowInsetsController
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -50,7 +57,11 @@ import android.widget.VideoView
 import androidx.annotation.RawRes
 import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.BuildCompat
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
@@ -60,15 +71,24 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.hsb.extensions_hsb.R
 import com.hsb.extensions_hsb.utils.annotaions.ExperimentalCrashTestApi
 import com.hsb.extensions_hsb.utils.fileextensions.FileExtensions
+import com.hsb.extensions_hsb.utils.globalextensions.Extensions.convertMillisToDateFormat
+import com.hsb.extensions_hsb.utils.globalextensions.Extensions.formatTo01
+import com.hsb.extensions_hsb.utils.globalextensions.Extensions.getAvailableRAM
+import com.hsb.extensions_hsb.utils.globalextensions.Extensions.intentData
 import com.hsb.extensions_hsb.utils.globalextensions.Extensions.log
 import com.hsb.extensions_hsb.utils.globalextensions.Extensions.rout
+import com.hsb.extensions_hsb.utils.globalextensions.Extensions.toast
+import com.hsb.extensions_hsb.utils.permissionH.PermissionH
 import com.hsb.extensions_hsb.utils.stringExtensions.StringExtensions.short
 import com.hsb.extensions_hsb.utils.viewextensions.ViewExtensions.beGone
 import com.hsb.extensions_hsb.utils.viewextensions.ViewExtensions.loadImage
 import com.hsb.extensions_hsb.utils.viewextensions.ViewExtensions.safeClickListeners
+import com.permissionx.guolindev.BuildConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -84,6 +104,8 @@ import java.security.NoSuchAlgorithmException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import javax.crypto.Cipher
+import javax.crypto.spec.SecretKeySpec
 import kotlin.math.hypot
 
 /**
@@ -91,9 +113,105 @@ import kotlin.math.hypot
  * Developed by Syed Haseeb
  * Github: https://github.com/syedhaseeb1
  *
- * Updated on Jan 09, 2024
+ * Updated on Dec 20, 2024
  */
 object Extensions {
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun AppCompatActivity.hideSystemUI() {
+        enableEdgeToEdge()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            // For Android 11 (API 30+) and above
+            window.setDecorFitsSystemWindows(false)
+            window.insetsController?.let { controller ->
+                controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+                controller.systemBarsBehavior =
+                    WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
+        } else {
+            // For Android 10 (API 29) and below
+            @Suppress("DEPRECATION")
+            window.decorView.systemUiVisibility = (
+                    View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                            or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            or View.SYSTEM_UI_FLAG_FULLSCREEN
+                            or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    )
+
+            // Optional: For API levels below 30, ensure status bar and navigation bar are hidden
+            @Suppress("DEPRECATION")
+            window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+            window.navigationBarColor = getColor(R.color.black)
+        }
+    }
+
+
+    fun FragmentActivity.sendNotificationAlert(title: String, subTitle: String, icon: Int) {
+        if (isAndroid13OrAbove()) {
+            PermissionH.requestPermissions(
+                listOf(Manifest.permission.POST_NOTIFICATIONS),
+                this
+            ) { isGranted ->
+                if (isGranted) {
+                    sendNotificationNow(title, subTitle, icon)
+                } else {
+                    toast("Permission Denied")
+                }
+            }
+        } else {
+            sendNotificationNow(title, subTitle, icon)
+        }
+
+    }
+
+    private fun Context.sendNotificationNow(title: String, subTitle: String, icon: Int) {
+        val channelId = "extension_hsb"
+        val notificationManager =
+            applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "important",
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = "Reminders"
+            }
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        val notification = NotificationCompat.Builder(applicationContext, channelId)
+            .setSmallIcon(icon)
+            .setContentTitle(title)
+            .setContentText(subTitle)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .build()
+
+        notificationManager.notify(901, notification)
+    }
+
+    @SuppressLint("GetInstance")
+    fun String.encryptWithKey(secretKey: String): String {
+        val cipher = Cipher.getInstance("AES")
+        val keySpec = SecretKeySpec(secretKey.toByteArray(), "AES")
+        cipher.init(Cipher.ENCRYPT_MODE, keySpec)
+
+        val encryptedBytes = cipher.doFinal(this.toByteArray())
+        return Base64.encodeToString(encryptedBytes, Base64.NO_WRAP) // Encode to Base64 for storage
+    }
+
+    @SuppressLint("GetInstance")
+    fun String.decryptWithKey(secretKey: String): String {
+        val cipher = Cipher.getInstance("AES")
+        val keySpec = SecretKeySpec(secretKey.toByteArray(), "AES")
+        cipher.init(Cipher.DECRYPT_MODE, keySpec)
+
+        val decodedBytes = Base64.decode(this, Base64.NO_WRAP)
+        val decryptedBytes = cipher.doFinal(decodedBytes)
+        return String(decryptedBytes)
+    }
+
     val intentData = "intentData"
     fun Context.toast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
@@ -148,9 +266,9 @@ object Extensions {
     }
 
 
-    fun Long.convertMillisToDateFormat(): String {
+    fun Long.convertMillisToDateFormat(format: String = "MMM d, yyyy 'at' hh:mm a"): String {
         val currentTimeMillis = System.currentTimeMillis()
-        val dateFormat = SimpleDateFormat("MMM d, yyyy 'at' hh:mm a", Locale.US)
+        val dateFormat = SimpleDateFormat(format, Locale.US)
 
         if (this > currentTimeMillis) {
             val currentDate = Date(currentTimeMillis)
@@ -161,7 +279,7 @@ object Extensions {
         }
     }
 
-    fun formatToDay(): String {
+    fun getDayCurrentName(): String {
         val formatLetterDay = SimpleDateFormat("EEEEE", Locale.getDefault())
         return formatLetterDay.format(Date())
     }
@@ -316,6 +434,15 @@ object Extensions {
     fun Bitmap.resizeBy(size: Int): Bitmap {
         return Bitmap.createScaledBitmap(this, width / size, height / size, false)
     }
+
+
+    suspend fun Bitmap.rotateBitmap(angle: Float = 90f) = withContext(Dispatchers.IO) {
+        async {
+            val matrix = Matrix().apply { postRotate(angle) }
+            Bitmap.createBitmap(this@rotateBitmap, 0, 0, width, height, matrix, true)
+        }.await()
+    }
+
 
     fun shortenUrl(longUrl: String, callback: (String?) -> Unit) {
         val client = OkHttpClient()
@@ -758,8 +885,14 @@ object Extensions {
 
     fun isAndroid13OrAbove() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
 
-    fun Any.logIt(tag: String = "ExtensionsHsb"):String {
-        Log.e(tag, this.toString())
+    fun Any.logIt(tag: String = "ExtensionsHsb", allowInRelease: Boolean = false): String {
+        if (allowInRelease) {
+            Log.e(tag, this.toString())
+        } else {
+            if (BuildConfig.DEBUG) {
+                Log.e(tag, this.toString())
+            }
+        }
         return this.toString()
     }
 

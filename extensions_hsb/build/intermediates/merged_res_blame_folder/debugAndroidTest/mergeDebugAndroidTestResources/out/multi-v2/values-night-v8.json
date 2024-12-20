@@ -1,0 +1,72 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.hsb.extensions_hsb.test.extensions_hsb-mergeDebugAndroidTestResources-35:/values-night-v8/values-night-v8.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\8.9\\transforms\\200b671ede44ca59aab00206bd1624ab\\transformed\\material-1.6.0\\res\\values-night-v8\\values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,130,241,330,431,538,645,744,847,935,1059,1161,1263,1379,1481,1595,1723,1839,1961,2097,2217,2351,2471,2583,2709,2826,2950,3080,3202,3340,3474,3590",
+                        "endColumns": "74,110,88,100,106,106,98,102,87,123,101,101,115,101,113,127,115,121,135,119,133,119,111,125,116,123,129,121,137,133,115,119",
+                        "endOffsets": "125,236,325,426,533,640,739,842,930,1054,1156,1258,1374,1476,1590,1718,1834,1956,2092,2212,2346,2466,2578,2704,2821,2945,3075,3197,3335,3469,3585,3705"
+                    },
+                    "to": {
+                        "startLines": "26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,51,59,60,61,62,63,64,65",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "1506,1581,1692,1781,1882,1989,2096,2195,2298,2386,2510,2612,2714,2830,2932,3046,3174,3290,3412,3548,3668,3802,3922,4034,4249,4798,4922,5052,5174,5312,5446,5562",
+                        "endColumns": "74,110,88,100,106,106,98,102,87,123,101,101,115,101,113,127,115,121,135,119,133,119,111,125,116,123,129,121,137,133,115,119",
+                        "endOffsets": "1576,1687,1776,1877,1984,2091,2190,2293,2381,2505,2607,2709,2825,2927,3041,3169,3285,3407,3543,3663,3797,3917,4029,4155,4361,4917,5047,5169,5307,5441,5557,5677"
+                    }
+                },
+                {
+                    "source": "F:\\My Projects\\Git\\extensions_hsb\\extensions_hsb\\build\\intermediates\\packaged_res\\debug\\packageDebugResources\\values-night-v8\\values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,15,18",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,642,829",
+                        "endLines": "14,17,21",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "637,824,1069"
+                    },
+                    "to": {
+                        "startLines": "13,52,55",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "919,4366,4553",
+                        "endLines": "25,54,58",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "1501,4548,4793"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\8.9\\transforms\\3396b93ac4362ca711c2213381523d5a\\transformed\\appcompat-1.5.0\\res\\values-night-v8\\values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,209,293,389,491,593,687",
+                        "endColumns": "69,83,83,95,101,101,93,88",
+                        "endOffsets": "120,204,288,384,486,588,682,771"
+                    },
+                    "to": {
+                        "startLines": "6,7,8,9,10,11,12,50",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "287,357,441,525,621,723,825,4160",
+                        "endColumns": "69,83,83,95,101,101,93,88",
+                        "endOffsets": "352,436,520,616,718,820,914,4244"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\8.9\\transforms\\8e4492c193456ccfab005983c3b20fc7\\transformed\\permissionx-1.7.1\\res\\values-night-v8\\values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,119,176,230",
+                        "endColumns": "63,56,53,56",
+                        "endOffsets": "114,171,225,282"
+                    }
+                }
+            ]
+        }
+    ]
+}

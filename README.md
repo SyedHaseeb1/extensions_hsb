@@ -1,10 +1,10 @@
 # HSB Extensions Library
 
 ## Overview
-The HSB Extensions Library is a powerful collection of Kotlin extensions designed to simplify your Android development tasks and enhance code readability. With a wide range of utility functions and extensions, this library is here to make your development journey smoother.
+The extensions_hsb Library is a powerful collection of Kotlin extensions designed to simplify your Android Kotlin development tasks and enhance code readability with reusability in mind. With a wide range of utility extension functions, this library is here to make your development journey smoother and very easy.
 
 ## Installation
-You can quickly integrate the HSB Extensions Library into your project. Add the following to your project's build.gradle file:
+You can quickly integrate the extensions_hsb Library into your Android Kotlin project. Add the following to your project's build.gradle file, either using KTS or Groovy Gradle:
 
 
 ### Gradle (Groovy)
@@ -34,14 +34,15 @@ dependencies {
     implementation("com.github.syedhaseeb1:extensions_hsb:$latestVersion")
 }
 ```
-## Features
+![Version](https://img.shields.io/github/release/syedhaseeb1/extensions_hsb.svg?maxAge=3600)
+## Features of Extensions_HSB
 - **Simplify Your Code**: Reduce boilerplate code and improve code readability.
-- **Boost Productivity**: Enhance your development productivity with a wide range of utility functions and extensions.
+- **Boost Productivity**: Enhance your Android App development productivity with a wide range of utility functions, extensions and classes.
 - **Versatile Functions**: Access numerous utility functions for common tasks.
 - **Keep Your Codebase Clean**: Organize and maintain your codebase effectively using these extensions.
 
 ## Usage
-To get started with the HSB Extensions Library, simply import the relevant extensions into your project and start using them in your code. Explore the documentation and examples to understand how to make the most of this library.
+To get started with the Extensions_HSB Library, simply import the relevant extensions or object class into your project and start using them in your code. Explore the documentation and examples to understand how to make the most of this library.
 
 ## Dependencies
 This library leverages the power of the following dependencies:
@@ -54,7 +55,7 @@ In addition to the mentioned dependencies, the HSB Extensions Library includes c
 
 # PermissionH
 
-The `PermissionH` object provides utility functions for managing runtime permissions in Android applications.
+The `PermissionH` object provides utility functions for managing runtime permissions in Android applications on top of PermissionX Lib.
 
 ## Usage
 
@@ -137,6 +138,7 @@ println("Formatted File Size: $formattedSize")
 
 | Function Name                    | Description                                       |
 | ---------------------------------| ------------------------------------------------- |
+| `Any.logIt(TAG)`                     | Log Anything with you Tag 
 | `intentData`                     | Holds data for intents.                            |
 | `getDeviceHashID()`              | Returns device ID as String.                       |
 | `toast(message)`                 | Displays a brief message.                          |
@@ -202,3 +204,10 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## Contact
 For questions, issues, or feedback, please visit the [GitHub Repository](https://github.com/syedhaseeb1/extensions_hsb) and open an issue. We'd love to hear from you!
+
+###
+| ![Platform](https://img.shields.io/badge/platform-Android-blue) | ![Kotlin](https://img.shields.io/badge/Kotlin-1.9.25-blue?logo=kotlin&logoColor=white) | ![JitPack](https://img.shields.io/badge/JitPack-Enabled-brightgreen) | ![License](https://img.shields.io/badge/License-Apache%202.0-blue) |
+|:---:|:---:|:---:|:---:|
+| ![Version](https://img.shields.io/github/release/syedhaseeb1/extensions_hsb.svg?maxAge=3600) | ![Extensions](https://img.shields.io/badge/Extensions-Kotlin-green) | ![Last Commit](https://img.shields.io/github/last-commit/syedhaseeb1/extensions_hsb) |
+
+###

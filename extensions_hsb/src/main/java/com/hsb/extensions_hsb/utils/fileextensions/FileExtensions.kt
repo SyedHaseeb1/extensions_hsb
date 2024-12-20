@@ -19,6 +19,7 @@ import android.os.ParcelFileDescriptor
 import android.provider.MediaStore
 import android.text.format.Formatter
 import android.view.View
+import androidx.core.content.FileProvider
 import com.hsb.extensions_hsb.utils.globalextensions.Extensions.formatTo01
 import okhttp3.Call
 import okhttp3.Callback
@@ -38,9 +39,17 @@ import java.text.DecimalFormat
  * Developed by Syed Haseeb
  * Github: https://github.com/syedhaseeb1
  *
- * Updated on Jan 08, 2024
+ * Updated on Dec 20, 2024
  */
 object FileExtensions {
+    fun File.getFileShareableUri(context: Context): Uri {
+        return FileProvider.getUriForFile(
+            context,
+            "${context.packageName}.fileprovider",
+            this
+        )
+    }
+
     fun File.formatFileSize(): String {
         val kiloByte = 1024
         val megaByte = kiloByte * 1024
@@ -309,6 +318,7 @@ object FileExtensions {
             false
         }
     }
+
     fun Context.generatePdfThumbnail(pdfFileUri: Uri): Bitmap? {
         try {
             val pdfFile = FileUtils.getFile(this, pdfFileUri)
