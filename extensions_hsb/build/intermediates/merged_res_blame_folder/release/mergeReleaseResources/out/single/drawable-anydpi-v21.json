@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "com.hsb.extensions_hsb-release-36:/drawable-anydpi-v21/ic_call_decline_low.xml",
+        "source": "com.hsb.extensions_hsb-core-1.13.0-8:/drawable-anydpi-v21/ic_call_decline_low.xml"
+    },
+    {
+        "merged": "com.hsb.extensions_hsb-release-36:/drawable-anydpi-v21/ic_call_answer.xml",
+        "source": "com.hsb.extensions_hsb-core-1.13.0-8:/drawable-anydpi-v21/ic_call_answer.xml"
+    },
+    {
+        "merged": "com.hsb.extensions_hsb-release-36:/drawable-anydpi-v21/ic_call_answer_video_low.xml",
+        "source": "com.hsb.extensions_hsb-core-1.13.0-8:/drawable-anydpi-v21/ic_call_answer_video_low.xml"
+    },
+    {
+        "merged": "com.hsb.extensions_hsb-release-36:/drawable-anydpi-v21/ic_call_answer_low.xml",
+        "source": "com.hsb.extensions_hsb-core-1.13.0-8:/drawable-anydpi-v21/ic_call_answer_low.xml"
+    },
+    {
+        "merged": "com.hsb.extensions_hsb-release-36:/drawable-anydpi-v21/ic_call_decline.xml",
+        "source": "com.hsb.extensions_hsb-core-1.13.0-8:/drawable-anydpi-v21/ic_call_decline.xml"
+    },
+    {
+        "merged": "com.hsb.extensions_hsb-release-36:/drawable-anydpi-v21/ic_call_answer_video.xml",
+        "source": "com.hsb.extensions_hsb-core-1.13.0-8:/drawable-anydpi-v21/ic_call_answer_video.xml"
+    }
+]

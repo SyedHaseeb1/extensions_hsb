@@ -1,0 +1,40 @@
+com.hsb.extensions_hsb-savedstate-1.2.1-0 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\04bd9e6b9552240619bf83eecb9f4d59\transformed\savedstate-1.2.1\res
+com.hsb.extensions_hsb-annotation-experimental-1.4.0-1 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\19f5ea2fa09be1fd9665883f952f5e9a\transformed\annotation-experimental-1.4.0\res
+com.hsb.extensions_hsb-material-1.6.0-2 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\200b671ede44ca59aab00206bd1624ab\transformed\material-1.6.0\res
+com.hsb.extensions_hsb-appcompat-resources-1.5.0-3 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\26673eeae417fa4b37ca44364c2e2bbe\transformed\appcompat-resources-1.5.0\res
+com.hsb.extensions_hsb-lifecycle-viewmodel-ktx-2.6.2-4 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\28668c4e513149bb88ccd39c3b6a660b\transformed\lifecycle-viewmodel-ktx-2.6.2\res
+com.hsb.extensions_hsb-cardview-1.0.0-5 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\2926a5752f5d6e8c20ca9af0112ac841\transformed\cardview-1.0.0\res
+com.hsb.extensions_hsb-lifecycle-viewmodel-savedstate-2.6.2-6 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\2a397918a5e00200685d5cba6b27a352\transformed\lifecycle-viewmodel-savedstate-2.6.2\res
+com.hsb.extensions_hsb-appcompat-1.5.0-7 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\3396b93ac4362ca711c2213381523d5a\transformed\appcompat-1.5.0\res
+com.hsb.extensions_hsb-core-1.13.0-8 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\354a36a6a5b716cf5d5896f5c0b92daa\transformed\core-1.13.0\res
+com.hsb.extensions_hsb-activity-ktx-1.9.3-9 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\3d3e59a0f16d6ffa861f449721dd209a\transformed\activity-ktx-1.9.3\res
+com.hsb.extensions_hsb-recyclerview-1.1.0-10 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\3e1d0e2cb4d0121d92bbba39a0f1e703\transformed\recyclerview-1.1.0\res
+com.hsb.extensions_hsb-viewpager2-1.0.0-11 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\3e88fc14152d20520c9572013d1d601e\transformed\viewpager2-1.0.0\res
+com.hsb.extensions_hsb-startup-runtime-1.1.1-12 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\46700ba3f2b740272dc55ec81bfdc277\transformed\startup-runtime-1.1.1\res
+com.hsb.extensions_hsb-core-runtime-2.2.0-13 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\47da420b62e1bf2b3fdb80ab49af0e30\transformed\core-runtime-2.2.0\res
+com.hsb.extensions_hsb-constraintlayout-2.0.1-14 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\4afa2b6e5c15ec5b87ed6e0f32da6dc3\transformed\constraintlayout-2.0.1\res
+com.hsb.extensions_hsb-fragment-1.3.6-15 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\4e1d808520f83631f5870b1b354d2ca3\transformed\fragment-1.3.6\res
+com.hsb.extensions_hsb-coordinatorlayout-1.1.0-16 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\5d71a40e040ed44d6f8328e20b4d99d4\transformed\coordinatorlayout-1.1.0\res
+com.hsb.extensions_hsb-core-ktx-1.13.0-17 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\6e33f1883f45bc4e18cd4ed4f2c8dbc8\transformed\core-ktx-1.13.0\res
+com.hsb.extensions_hsb-lifecycle-livedata-core-2.6.2-18 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\7fe59ad436ab2773f214a6d758a210b4\transformed\lifecycle-livedata-core-2.6.2\res
+com.hsb.extensions_hsb-glide-4.16.0-19 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\8e07f418d9d9763e03e2b7e6febf497c\transformed\glide-4.16.0\res
+com.hsb.extensions_hsb-permissionx-1.7.1-20 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\8e4492c193456ccfab005983c3b20fc7\transformed\permissionx-1.7.1\res
+com.hsb.extensions_hsb-lifecycle-runtime-ktx-2.6.2-21 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\94594d1fef82d47addb934155827a444\transformed\lifecycle-runtime-ktx-2.6.2\res
+com.hsb.extensions_hsb-profileinstaller-1.3.1-22 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\aadbd7186ca26cde6b0fb1f39463e9bd\transformed\profileinstaller-1.3.1\res
+com.hsb.extensions_hsb-savedstate-ktx-1.2.1-23 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\ace81722d405d1122cdb17d74c028e88\transformed\savedstate-ktx-1.2.1\res
+com.hsb.extensions_hsb-activity-1.9.3-24 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\bfe77ba0241162b9d2cb7013a24db40b\transformed\activity-1.9.3\res
+com.hsb.extensions_hsb-emoji2-1.2.0-25 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\ce021010e94e21d119fe5926660fe14e\transformed\emoji2-1.2.0\res
+com.hsb.extensions_hsb-lifecycle-process-2.6.2-26 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\d10620ea08d6fe11b33313f372b487bd\transformed\lifecycle-process-2.6.2\res
+com.hsb.extensions_hsb-lifecycle-viewmodel-2.6.2-27 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\d430b5c2067cbbea210c1e03bb917501\transformed\lifecycle-viewmodel-2.6.2\res
+com.hsb.extensions_hsb-transition-1.2.0-28 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\de1a9151b058b3967f6b8065360f8014\transformed\transition-1.2.0\res
+com.hsb.extensions_hsb-lifecycle-runtime-2.6.2-29 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\df06a799d444c3c3eed841f72564919c\transformed\lifecycle-runtime-2.6.2\res
+com.hsb.extensions_hsb-drawerlayout-1.1.1-30 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\f144d8bb1a339c91c44881d345fdb047\transformed\drawerlayout-1.1.1\res
+com.hsb.extensions_hsb-lifecycle-livedata-2.6.2-31 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\f528e22082ec8e3c28abefd916dfa285\transformed\lifecycle-livedata-2.6.2\res
+com.hsb.extensions_hsb-emoji2-views-helper-1.2.0-32 C:\Users\Syed Haseeb Home\.gradle\caches\8.9\transforms\ff9da7b216c0fcaffec8bf472a3683b4\transformed\emoji2-views-helper-1.2.0\res
+com.hsb.extensions_hsb-pngs-33 F:\My Projects\Git\extensions_hsb\extensions_hsb\build\generated\res\pngs\release
+com.hsb.extensions_hsb-resValues-34 F:\My Projects\Git\extensions_hsb\extensions_hsb\build\generated\res\resValues\release
+com.hsb.extensions_hsb-mergeReleaseResources-35 F:\My Projects\Git\extensions_hsb\extensions_hsb\build\intermediates\incremental\release\mergeReleaseResources\merged.dir
+com.hsb.extensions_hsb-mergeReleaseResources-36 F:\My Projects\Git\extensions_hsb\extensions_hsb\build\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+com.hsb.extensions_hsb-release-37 F:\My Projects\Git\extensions_hsb\extensions_hsb\build\intermediates\merged_res\release\mergeReleaseResources
+com.hsb.extensions_hsb-main-38 F:\My Projects\Git\extensions_hsb\extensions_hsb\src\main\res
+com.hsb.extensions_hsb-release-39 F:\My Projects\Git\extensions_hsb\extensions_hsb\src\release\res

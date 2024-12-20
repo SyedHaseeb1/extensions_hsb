@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.hsb.extensions_hsb-release-36:/mipmap-xhdpi-v4/ic_launcher_round.webp",
+        "source": "com.hsb.extensions_hsb-main-37:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.hsb.extensions_hsb-release-36:/mipmap-xhdpi-v4/ic_launcher.webp",
+        "source": "com.hsb.extensions_hsb-main-37:/mipmap-xhdpi/ic_launcher.webp"
+    }
+]

@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.hsb.extensions_hsb-release-36:/layout-land/material_clock_period_toggle_land.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-2:/layout-land/material_clock_period_toggle_land.xml"
+    },
+    {
+        "merged": "com.hsb.extensions_hsb-release-36:/layout-land/material_timepicker.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-2:/layout-land/material_timepicker.xml"
+    },
+    {
+        "merged": "com.hsb.extensions_hsb-release-36:/layout-land/mtrl_picker_header_dialog.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-2:/layout-land/mtrl_picker_header_dialog.xml"
+    }
+]

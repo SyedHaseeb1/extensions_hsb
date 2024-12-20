@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.hsb.extensions_hsb-release-36:/mipmap-anydpi-v26/ic_launcher_round.xml",
+        "source": "com.hsb.extensions_hsb-main-37:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.hsb.extensions_hsb-release-36:/mipmap-anydpi-v26/ic_launcher.xml",
+        "source": "com.hsb.extensions_hsb-main-37:/mipmap-anydpi-v26/ic_launcher.xml"
+    }
+]

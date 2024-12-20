@@ -1,0 +1,36 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.hsb.extensions_hsb-mergeReleaseResources-34:/values-v22/values-v22.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\8.9\\transforms\\3396b93ac4362ca711c2213381523d5a\\transformed\\appcompat-1.5.0\\res\\values-v22\\values-v22.xml",
+                    "from": {
+                        "startLines": "2,3,4,9",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,130,217,487",
+                        "endLines": "2,3,8,13",
+                        "endColumns": "74,86,12,12",
+                        "endOffsets": "125,212,482,764"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "com.hsb.extensions_hsb-release-36:/values-v22/values-v22.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\8.9\\transforms\\3396b93ac4362ca711c2213381523d5a\\transformed\\appcompat-1.5.0\\res\\values-v22\\values-v22.xml",
+                    "from": {
+                        "startLines": "2,3,4,9",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,130,217,487",
+                        "endLines": "2,3,8,13",
+                        "endColumns": "74,86,12,12",
+                        "endOffsets": "125,212,482,764"
+                    }
+                }
+            ]
+        }
+    ]
+}
