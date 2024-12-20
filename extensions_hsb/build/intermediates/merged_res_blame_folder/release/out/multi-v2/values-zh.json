@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.hsb.extensions_hsb-merged_res-36:/values-zh/values-zh.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\transforms-3\\1cd28a8fb17c6a6e0a7f0456ce8888f1\\transformed\\permissionx-1.7.1\\res\\values-zh\\values-zh.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,131,204,277,338,410,481",
+                        "endColumns": "75,72,72,60,71,70,61",
+                        "endOffsets": "126,199,272,333,405,476,538"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "com.hsb.extensions_hsb-mergeReleaseResources-34:/values-zh/values-zh.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\transforms-3\\1cd28a8fb17c6a6e0a7f0456ce8888f1\\transformed\\permissionx-1.7.1\\res\\values-zh\\values-zh.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,131,204,277,338,410,481",
+                        "endColumns": "75,72,72,60,71,70,61",
+                        "endOffsets": "126,199,272,333,405,476,538"
+                    }
+                }
+            ]
+        }
+    ]
+}

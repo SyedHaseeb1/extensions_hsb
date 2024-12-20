@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.hsb.extensions_hsb-merged_res-36:/layout-v26/abc_screen_toolbar.xml",
+        "source": "com.hsb.extensions_hsb-appcompat-1.5.0-27:/layout-v26/abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "com.hsb.extensions_hsb-merged_res-36:/layout-v26/mtrl_calendar_month.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/layout-v26/mtrl_calendar_month.xml"
+    }
+]

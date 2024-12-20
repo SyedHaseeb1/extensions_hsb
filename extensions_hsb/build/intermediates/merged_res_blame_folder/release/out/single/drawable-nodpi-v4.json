@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "com.hsb.extensions_hsb-merged_res-36:/drawable-nodpi-v4/permissionx_ic_install.png",
+        "source": "com.hsb.extensions_hsb-permissionx-1.7.1-7:/drawable-nodpi-v4/permissionx_ic_install.png"
+    },
+    {
+        "merged": "com.hsb.extensions_hsb-merged_res-36:/drawable-nodpi-v4/permissionx_ic_setting.png",
+        "source": "com.hsb.extensions_hsb-permissionx-1.7.1-7:/drawable-nodpi-v4/permissionx_ic_setting.png"
+    },
+    {
+        "merged": "com.hsb.extensions_hsb-merged_res-36:/drawable-nodpi-v4/permissionx_ic_notification.png",
+        "source": "com.hsb.extensions_hsb-permissionx-1.7.1-7:/drawable-nodpi-v4/permissionx_ic_notification.png"
+    },
+    {
+        "merged": "com.hsb.extensions_hsb-merged_res-36:/drawable-nodpi-v4/permissionx_ic_alert.png",
+        "source": "com.hsb.extensions_hsb-permissionx-1.7.1-7:/drawable-nodpi-v4/permissionx_ic_alert.png"
+    }
+]
