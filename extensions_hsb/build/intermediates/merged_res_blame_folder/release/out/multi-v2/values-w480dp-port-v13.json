@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.hsb.extensions_hsb-mergeReleaseResources-34:/values-w480dp-port-v13/values-w480dp-port-v13.xml",
+            "outputFile": "com.hsb.extensions_hsb-merged_res-37:/values-w480dp-port-v13/values-w480dp-port-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\transforms-3\\90d83705e813f4b2ceb5a6e49ee37b4b\\transformed\\material-1.6.0\\res\\values-w480dp-port-v13\\values-w480dp-port-v13.xml",
+                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\transforms-3\\7ddee80ca84f98b7f3bbd2e7f7ff25d4\\transformed\\material-1.6.0\\res\\values-w480dp-port-v13\\values-w480dp-port-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -16,10 +16,10 @@
             ]
         },
         {
-            "outputFile": "com.hsb.extensions_hsb-merged_res-36:/values-w480dp-port-v13/values-w480dp-port-v13.xml",
+            "outputFile": "com.hsb.extensions_hsb-mergeReleaseResources-35:/values-w480dp-port-v13/values-w480dp-port-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\transforms-3\\90d83705e813f4b2ceb5a6e49ee37b4b\\transformed\\material-1.6.0\\res\\values-w480dp-port-v13\\values-w480dp-port-v13.xml",
+                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\transforms-3\\7ddee80ca84f98b7f3bbd2e7f7ff25d4\\transformed\\material-1.6.0\\res\\values-w480dp-port-v13\\values-w480dp-port-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

@@ -1,22 +1,22 @@
 [
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/anim-v21/mtrl_bottom_sheet_slide_in.xml",
-        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/anim-v21/mtrl_bottom_sheet_slide_in.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/anim-v21/mtrl_bottom_sheet_slide_in.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-9:/anim-v21/mtrl_bottom_sheet_slide_in.xml"
     },
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/anim-v21/mtrl_bottom_sheet_slide_out.xml",
-        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/anim-v21/mtrl_bottom_sheet_slide_out.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/anim-v21/mtrl_bottom_sheet_slide_out.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-9:/anim-v21/mtrl_bottom_sheet_slide_out.xml"
     },
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/anim-v21/design_bottom_sheet_slide_out.xml",
-        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/anim-v21/design_bottom_sheet_slide_out.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/anim-v21/design_bottom_sheet_slide_out.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-9:/anim-v21/design_bottom_sheet_slide_out.xml"
     },
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/anim-v21/design_bottom_sheet_slide_in.xml",
-        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/anim-v21/design_bottom_sheet_slide_in.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/anim-v21/design_bottom_sheet_slide_in.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-9:/anim-v21/design_bottom_sheet_slide_in.xml"
     },
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/anim-v21/fragment_fast_out_extra_slow_in.xml",
-        "source": "com.hsb.extensions_hsb-fragment-1.3.6-9:/anim-v21/fragment_fast_out_extra_slow_in.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/anim-v21/fragment_fast_out_extra_slow_in.xml",
+        "source": "com.hsb.extensions_hsb-fragment-1.3.6-10:/anim-v21/fragment_fast_out_extra_slow_in.xml"
     }
 ]

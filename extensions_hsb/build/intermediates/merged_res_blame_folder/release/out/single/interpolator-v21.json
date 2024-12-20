@@ -1,14 +1,14 @@
 [
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/interpolator-v21/mtrl_fast_out_linear_in.xml",
-        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/interpolator-v21/mtrl_fast_out_linear_in.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/interpolator-v21/mtrl_linear_out_slow_in.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-9:/interpolator-v21/mtrl_linear_out_slow_in.xml"
     },
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/interpolator-v21/mtrl_linear_out_slow_in.xml",
-        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/interpolator-v21/mtrl_linear_out_slow_in.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/interpolator-v21/mtrl_fast_out_linear_in.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-9:/interpolator-v21/mtrl_fast_out_linear_in.xml"
     },
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/interpolator-v21/mtrl_fast_out_slow_in.xml",
-        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/interpolator-v21/mtrl_fast_out_slow_in.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/interpolator-v21/mtrl_fast_out_slow_in.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-9:/interpolator-v21/mtrl_fast_out_slow_in.xml"
     }
 ]

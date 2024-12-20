@@ -1,42 +1,42 @@
 [
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/color-v31/m3_dynamic_default_color_primary_text.xml",
-        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/color-v31/m3_dynamic_default_color_primary_text.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/color-v31/m3_dynamic_dark_highlighted_text.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-9:/color-v31/m3_dynamic_dark_highlighted_text.xml"
     },
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/color-v31/m3_dynamic_hint_foreground.xml",
-        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/color-v31/m3_dynamic_hint_foreground.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/color-v31/m3_dynamic_dark_hint_foreground.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-9:/color-v31/m3_dynamic_dark_hint_foreground.xml"
     },
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/color-v31/m3_dynamic_dark_default_color_primary_text.xml",
-        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/color-v31/m3_dynamic_dark_default_color_primary_text.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/color-v31/m3_dynamic_dark_primary_text_disable_only.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-9:/color-v31/m3_dynamic_dark_primary_text_disable_only.xml"
     },
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/color-v31/m3_dynamic_default_color_secondary_text.xml",
-        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/color-v31/m3_dynamic_default_color_secondary_text.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/color-v31/m3_dynamic_default_color_secondary_text.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-9:/color-v31/m3_dynamic_default_color_secondary_text.xml"
     },
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/color-v31/m3_dynamic_dark_default_color_secondary_text.xml",
-        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/color-v31/m3_dynamic_dark_default_color_secondary_text.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/color-v31/m3_dynamic_default_color_primary_text.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-9:/color-v31/m3_dynamic_default_color_primary_text.xml"
     },
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/color-v31/m3_dynamic_primary_text_disable_only.xml",
-        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/color-v31/m3_dynamic_primary_text_disable_only.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/color-v31/m3_dynamic_primary_text_disable_only.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-9:/color-v31/m3_dynamic_primary_text_disable_only.xml"
     },
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/color-v31/m3_dynamic_dark_highlighted_text.xml",
-        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/color-v31/m3_dynamic_dark_highlighted_text.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/color-v31/m3_dynamic_dark_default_color_secondary_text.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-9:/color-v31/m3_dynamic_dark_default_color_secondary_text.xml"
     },
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/color-v31/m3_dynamic_dark_hint_foreground.xml",
-        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/color-v31/m3_dynamic_dark_hint_foreground.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/color-v31/m3_dynamic_dark_default_color_primary_text.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-9:/color-v31/m3_dynamic_dark_default_color_primary_text.xml"
     },
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/color-v31/m3_dynamic_dark_primary_text_disable_only.xml",
-        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/color-v31/m3_dynamic_dark_primary_text_disable_only.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/color-v31/m3_dynamic_hint_foreground.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-9:/color-v31/m3_dynamic_hint_foreground.xml"
     },
     {
-        "merged": "com.hsb.extensions_hsb-merged_res-36:/color-v31/m3_dynamic_highlighted_text.xml",
-        "source": "com.hsb.extensions_hsb-material-1.6.0-23:/color-v31/m3_dynamic_highlighted_text.xml"
+        "merged": "com.hsb.extensions_hsb-merged_res-37:/color-v31/m3_dynamic_highlighted_text.xml",
+        "source": "com.hsb.extensions_hsb-material-1.6.0-9:/color-v31/m3_dynamic_highlighted_text.xml"
     }
 ]

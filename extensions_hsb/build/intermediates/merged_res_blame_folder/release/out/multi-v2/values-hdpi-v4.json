@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.hsb.extensions_hsb-merged_res-36:/values-hdpi-v4/values-hdpi-v4.xml",
+            "outputFile": "com.hsb.extensions_hsb-merged_res-37:/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\transforms-3\\bf3e0e4592120e2f25ee534fd5d1be0a\\transformed\\appcompat-1.5.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\transforms-3\\b2b07a3b391047c4dc7980c3e5cffbbc\\transformed\\appcompat-1.5.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -17,10 +17,10 @@
             ]
         },
         {
-            "outputFile": "com.hsb.extensions_hsb-mergeReleaseResources-34:/values-hdpi-v4/values-hdpi-v4.xml",
+            "outputFile": "com.hsb.extensions_hsb-mergeReleaseResources-35:/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\transforms-3\\bf3e0e4592120e2f25ee534fd5d1be0a\\transformed\\appcompat-1.5.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\transforms-3\\b2b07a3b391047c4dc7980c3e5cffbbc\\transformed\\appcompat-1.5.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

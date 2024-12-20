@@ -2,6 +2,10 @@
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    package="com.hsb.extensions_hsb" >
 4
-5    <uses-sdk android:minSdkVersion="21" />
-6
-7</manifest>
+5    <uses-sdk
+6        android:minSdkVersion="21"
+6-->F:\My Projects\Git\extensions_hsb\extensions_hsb\src\main\AndroidManifest.xml
+7        android:targetSdkVersion="34" />
+7-->F:\My Projects\Git\extensions_hsb\extensions_hsb\src\main\AndroidManifest.xml
+8
+9</manifest>

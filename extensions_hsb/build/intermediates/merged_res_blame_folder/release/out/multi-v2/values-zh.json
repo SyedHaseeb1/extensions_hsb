@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.hsb.extensions_hsb-merged_res-36:/values-zh/values-zh.xml",
+            "outputFile": "com.hsb.extensions_hsb-mergeReleaseResources-35:/values-zh/values-zh.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\transforms-3\\1cd28a8fb17c6a6e0a7f0456ce8888f1\\transformed\\permissionx-1.7.1\\res\\values-zh\\values-zh.xml",
+                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\transforms-3\\1b19b0cb3be1d85af83570586aa5ae39\\transformed\\permissionx-1.7.1\\res\\values-zh\\values-zh.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8",
                         "startColumns": "4,4,4,4,4,4,4",
@@ -16,10 +16,10 @@
             ]
         },
         {
-            "outputFile": "com.hsb.extensions_hsb-mergeReleaseResources-34:/values-zh/values-zh.xml",
+            "outputFile": "com.hsb.extensions_hsb-merged_res-37:/values-zh/values-zh.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\transforms-3\\1cd28a8fb17c6a6e0a7f0456ce8888f1\\transformed\\permissionx-1.7.1\\res\\values-zh\\values-zh.xml",
+                    "source": "C:\\Users\\Syed Haseeb Home\\.gradle\\caches\\transforms-3\\1b19b0cb3be1d85af83570586aa5ae39\\transformed\\permissionx-1.7.1\\res\\values-zh\\values-zh.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8",
                         "startColumns": "4,4,4,4,4,4,4",
