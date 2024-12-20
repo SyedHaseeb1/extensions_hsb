@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'maven-publish'
 }
-def lib_version = "1.2.3.3.3"
+def lib_version = "1.2.3.3.4"
 android {
     namespace 'com.hsb.extensions_hsb'
     compileSdk 34
@@ -24,11 +24,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = '11'
     }
     buildFeatures {
         viewBinding = true
