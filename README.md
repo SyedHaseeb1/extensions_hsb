@@ -138,7 +138,7 @@ println("Formatted File Size: $formattedSize")
 
 | Function Name                    | Description                                       |
 | ---------------------------------| ------------------------------------------------- |
-| `Any.logIt(TAG)`                     | Log Anything with you Tag 
+| `Any.logIt(TAG)`                     | Log Anything with your Tag 
 | `intentData`                     | Holds data for intents.                            |
 | `getDeviceHashID()`              | Returns device ID as String.                       |
 | `toast(message)`                 | Displays a brief message.                          |
