@@ -885,16 +885,13 @@ object Extensions {
 
     fun isAndroid13OrAbove() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
 
-    fun Any.logIt(tag: String = "ExtensionsHsb", allowInRelease: Boolean = false): String {
-        if (allowInRelease) {
-            Log.e(tag, this.toString())
-        } else {
-            if (BuildConfig.DEBUG) {
-                Log.e(tag, this.toString())
-            }
-        }
-        return this.toString()
+    fun Any.logIt(
+        tag: String = "ExtensionsHsb",
+    ): String {
+        Log.e(tag, "//--------------------\n$this\n--------------------//")
+        return "$this"
     }
+
 
     fun View.convertToPdf(fileName: String = "temp_${System.currentTimeMillis()}"): String {
         // Create a PDF document
