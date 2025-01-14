@@ -3,6 +3,8 @@
 ## Overview
 The extensions_hsb Library is a powerful collection of Kotlin extensions designed to simplify your Android Kotlin development tasks and enhance code readability with reusability in mind. With a wide range of utility extension functions, this library is here to make your development journey smoother and very easy.
 
+![Visitor's Count](https://profile-counter.glitch.me/extensions_hsb/count.svg)
+
 ## Installation
 You can quickly integrate the extensions_hsb Library into your Android Kotlin project. Add the following to your project's build.gradle file, either using KTS or Groovy Gradle:
 
